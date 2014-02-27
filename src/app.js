@@ -5,7 +5,7 @@ define(['jquery', 'marionette', 'backbone', 'router'], function ($, Marionette, 
         var router = new Router({ app: app });
 
         router.on("route", function(page, args) {
-            if (args.length > 0) {
+            if (args.length > 0 && args[0] !== undefined) {
                 var tournament = router.tournaments.get(args[0]);
 
                 function setDebugInfo() {
