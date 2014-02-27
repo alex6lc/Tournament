@@ -1,0 +1,89 @@
+#debug {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 500px
+}
+
+.group-editor ul,
+.participant-label-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    min-height: 200px;
+}
+
+.participant-label-list li {
+    display: inline;
+}
+
+.participant-label {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    width: 120px;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.group-editor {
+    border: 1px solid red;
+    float: left;
+    width: 200px;
+}
+
+.bracket
+{
+    position: relative;
+    display: block;
+}
+
+.round-bracket
+{
+    float: left;
+    display: inline-block;
+}
+.round-header
+{
+    border: 1px solid #000000;
+    text-align: center;
+    line-height: 20px;
+}
+.team-bracket ul {
+    height: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.team-bracket .participant-label {
+    margin: 0;
+    padding: 0;
+    width: 120px;
+}
+
+.team-bracket
+{
+    position: absolute;
+    font-size: 10px;
+    border-spacing: 0;
+    border: 1px solid #000000;
+}
+
+.team-bracket td
+{
+    height: 50%;
+}
+
+.team-bracket .top
+{
+    border-top: 1px solid #505050;
+}
+.team-bracket .left
+{
+    border-left: 1px solid #505050;
+    width: 25px;
+}

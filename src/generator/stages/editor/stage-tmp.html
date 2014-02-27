@@ -1,0 +1,20 @@
+<form action="#" method="post">
+    <label>
+        Title
+        <input name="Title" type="text" value="{{Title}}">
+    </label>
+
+    <br />
+
+    <label>
+        Type
+        <select name="Type" class="js-stage-type">
+            <option value="0" {{#if isGroup}}selected{{/if}}>Group</option>
+            <option value="1" {{#if isElimination}}selected{{/if}}>Single Elimination</option>
+        </select>
+    </label>
+
+    <div class="js-stage"></div>
+
+    <input type="submit" value="Next">
+</form>
