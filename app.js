@@ -27,7 +27,7 @@ var app = express();
  * Mongoose configuration.
  */
 
-mongoose.connect(process.env.MONGOLAB_URI || secrets.db);
+mongoose.connect(secrets.db);
 mongoose.connection.on('error', function() {
   console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.');
 });
