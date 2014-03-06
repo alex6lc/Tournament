@@ -16,7 +16,7 @@ define([
             event.preventDefault();
             event.stopPropagation();
 
-            Navigator("Generator/" + this.model.id);
+            Navigator("generator/" + this.model.id);
         },
         deleteTournament: function (event) {
             event.preventDefault();
@@ -49,7 +49,7 @@ define([
             event.preventDefault();
             event.stopPropagation();
 
-            Navigator("Generator/New");
+            Navigator("generator/New");
         }
     });
 

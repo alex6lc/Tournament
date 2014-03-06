@@ -42,9 +42,9 @@ define([
             "generator/:tournamentId/participants": "showParticipants",
             "generator/:tournamentId/stages": "showStages",
             "generator/:tournamentId/stages/new": "showNewStage",
-            "Generator/:tournamentId/stages/:stageId": "showEditStage",
-            "Generator/:tournamentId/stages/:stageId/rounds": "showEditRounds",
-            "Generator/:tournamentId/stages/:stageId/preview": "showStagePreview"
+            "generator/:tournamentId/stages/:stageId": "showEditStage",
+            "generator/:tournamentId/stages/:stageId/rounds": "showEditRounds",
+            "generator/:tournamentId/stages/:stageId/preview": "showStagePreview"
         },
         controller: {
             tournaments: function () {
