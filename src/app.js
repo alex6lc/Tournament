@@ -1,11 +1,11 @@
-define(['jquery', 'marionette', 'backbone', 'router'], function ($, Marionette, Backbone, Router) {
+define(['jquery', 'underscore', 'marionette', 'backbone', 'router'], function ($, _, Marionette, Backbone, Router) {
     var app = new Marionette.Application();
 
     app.addInitializer(function(){
         var router = app.router = new Router({ app: app });
 
         router.on("route", function(page, args) {
-            if (args.length > 0 && args[0] !== null) {
+            if (args.length > 0 && _.isString(args[0])) {
                 var tournament = router.tournaments.get(args[0]);
 
                 function setDebugInfo() {
