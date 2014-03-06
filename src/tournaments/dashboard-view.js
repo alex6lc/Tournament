@@ -49,7 +49,7 @@ define([
             event.preventDefault();
             event.stopPropagation();
 
-            Navigator("generator/New");
+            Navigator("generator/new");
         }
     });
 
