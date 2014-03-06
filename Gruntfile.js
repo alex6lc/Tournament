@@ -28,11 +28,18 @@ module.exports = function (grunt) {
                     livereload: LIVERELOAD_PORT
                 }
             }
+        },
+        copy: {
+            dev: {
+                src: 'src/main.js',
+                dest: 'src/dest/'
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-open');
 
     grunt.registerTask('server', [
@@ -40,4 +47,6 @@ module.exports = function (grunt) {
         'open',
         'watch'
     ]);
+
+    grunt.registerTask('dev', ['copy:dev']);
 };
