@@ -9,7 +9,6 @@ var path = require('path');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var expressValidator = require('express-validator');
-var connectAssets = require('connect-assets');
 
 /**
  * API keys + Passport configuration.
@@ -28,7 +27,7 @@ var app = express();
  * Mongoose configuration.
  */
 
-mongoose.connect(secrets.db);
+mongoose.connect(process.env.MONGOLAB_URI || secrets.db);
 mongoose.connection.on('error', function() {
   console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.');
 });
