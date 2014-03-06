@@ -1,6 +1,12 @@
 language: node_js
-node_js:
-  - 0.10
-
-before_script:
-  - npm install -g grunt-cli
+node_js: 
+- 0.10
+before_script: 
+- npm install -g grunt-cli
+deploy: 
+  provider: heroku
+  api_key: 
+    secure: UFwLaIDJsgvC3fWn0J615ZMn58SOo/rnxYbDNqiHVgc+o/DSmxZhHueBHlqOtAqw78y75BLOhE+Qav1og/OzCn2FnGyNJJaUsQjVsZW4+bsl7dhxNPRUql6xIA3VGAAdZTET0n8aPXtLVI6DLcLsM96a0572/b7k4LH0+acZ3EY=
+  app: tournament-dev
+  "on": 
+    repo: alex6lc/Tournament
