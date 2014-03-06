@@ -5,7 +5,7 @@ define(['jquery', 'marionette', 'backbone', 'router'], function ($, Marionette, 
         var router = new Router({ app: app });
 
         router.on("route", function(page, args) {
-            if (args.length > 0 && args[0] !== undefined) {
+            if (args.length > 0 && args[0] !== null) {
                 var tournament = router.tournaments.get(args[0]);
 
                 function setDebugInfo() {
@@ -25,7 +25,7 @@ define(['jquery', 'marionette', 'backbone', 'router'], function ($, Marionette, 
 
     app.on("initialize:after", function () {
         if (Backbone.history) {
-            Backbone.history.start();
+            Backbone.history.start({ pushState: true });
         }
     });
 

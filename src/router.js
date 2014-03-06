@@ -1,5 +1,7 @@
 define([
     'marionette',
+    'account/login-view',
+    'account/signup-view',
     'generator/tournaments',
     'tournaments/dashboard-view',
     'generator/tournament-view',
@@ -9,6 +11,8 @@ define([
     'generator/stages/rounds/rounds-view',
     'tournaments/stages/groups/groups-view'
 ], function (Marionette,
+             LoginView,
+             SignupView,
              Tournaments,
              DashboardView,
              TournamentView,
@@ -31,6 +35,8 @@ define([
         },
         appRoutes: {
             "": "tournaments",
+            "Login": "showLogin",
+            "Signup": "showSignup",
             "Generator/New": "showNewTournament",
             "Generator/:tournamentId": "showTournament",
             "Generator/:tournamentId/Participants": "showParticipants",
@@ -45,6 +51,14 @@ define([
                 var view = new DashboardView({
                     collection: tournaments
                 });
+                app.main.show(view);
+            },
+            showLogin: function () {
+                var view = new LoginView();
+                app.main.show(view);
+            },
+            showSignup: function () {
+                var view = new SignupView();
                 app.main.show(view);
             },
             showNewTournament: function() {
