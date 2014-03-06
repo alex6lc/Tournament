@@ -50,14 +50,14 @@ define([
 
             var worstCheckEver = this.model.get("Participants").length === newData.length;
             if(worstCheckEver) {
-                Navigator("/Generator/" + self.model.id + "/Stages");
+                Navigator("/generator/" + self.model.id + "/stages");
                 return;
             }
 
             this.model.get("Participants").reset(newData);
 
             this.model.save().done(function(){
-                Navigator("/Generator/" + self.model.id + "/Stages");
+                Navigator("/generator/" + self.model.id + "/stages");
             });
         }
     });

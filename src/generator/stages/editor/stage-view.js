@@ -92,7 +92,7 @@ define([
             stages.add(stage);
 
             this.tournament.save().done(function () {
-                Navigator("/Generator/" + self.tournament.id + "/Stages/" + stage.id + "/Rounds");
+                Navigator("/generator/" + self.tournament.id + "/stages/" + stage.id + "/rounds");
             });
         }
     });

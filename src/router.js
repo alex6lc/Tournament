@@ -35,16 +35,16 @@ define([
         },
         appRoutes: {
             "": "tournaments",
-            "Login": "showLogin",
-            "Signup": "showSignup",
-            "Generator/New": "showNewTournament",
-            "Generator/:tournamentId": "showTournament",
-            "Generator/:tournamentId/Participants": "showParticipants",
-            "Generator/:tournamentId/Stages": "showStages",
-            "Generator/:tournamentId/Stages/New": "showNewStage",
-            "Generator/:tournamentId/Stages/:stageId": "showEditStage",
-            "Generator/:tournamentId/Stages/:stageId/Rounds": "showEditRounds",
-            "Generator/:tournamentId/Stages/:stageId/Preview": "showStagePreview"
+            "login": "showLogin",
+            "signup": "showSignup",
+            "generator/new": "showNewTournament",
+            "generator/:tournamentId": "showTournament",
+            "generator/:tournamentId/participants": "showParticipants",
+            "generator/:tournamentId/stages": "showStages",
+            "generator/:tournamentId/stages/new": "showNewStage",
+            "Generator/:tournamentId/stages/:stageId": "showEditStage",
+            "Generator/:tournamentId/stages/:stageId/rounds": "showEditRounds",
+            "Generator/:tournamentId/stages/:stageId/preview": "showStagePreview"
         },
         controller: {
             tournaments: function () {

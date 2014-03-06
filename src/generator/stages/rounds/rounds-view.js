@@ -42,7 +42,7 @@ define([
 
             this.model.save().done(function(){
                 //Navigator("/Generator/" + self.model.id + "/Stages/" + self.stage.id  + "/Preview");
-                Navigator("/Generator/" + self.model.id + "/Stages");
+                Navigator("/generator/" + self.model.id + "/stages");
             });
         }
     });

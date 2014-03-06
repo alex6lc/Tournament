@@ -20,7 +20,7 @@ define([
             event.preventDefault();
             event.stopPropagation();
 
-            Navigator("/Generator/"  + this.tournamentId + "/Stages/" + this.model.id);
+            Navigator("/generator/"  + this.tournamentId + "/stages/" + this.model.id);
         }
     });
 
@@ -50,7 +50,7 @@ define([
             event.preventDefault();
             event.stopPropagation();
 
-            Navigator("/Generator/"  + this.model.id + "/Stages/New");
+            Navigator("/generator/"  + this.model.id + "/stages/new");
         }
     });
 

@@ -20,7 +20,7 @@ define([
 
             var data = Utils.serializeObject(event.target);
             this.model.save(data).done(function(){
-                Navigator("/Generator/" + self.model.id + "/Participants");
+                Navigator("/generator/" + self.model.id + "/participants");
             });
         }
     });
