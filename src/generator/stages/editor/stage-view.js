@@ -57,7 +57,7 @@ define([
         },
         changeType: function () {
             var type = this.$(".js-stage-type").val();
-            this.stage.show(this.getStageTypeView(type));
+            this.stage.show(this.getStageTypeView(parseInt(type, 10)));
         },
 
         saveForm: function (event) {
