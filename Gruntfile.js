@@ -29,10 +29,10 @@ module.exports = function (grunt) {
         requirejs: {
             dist: {
                 options: {
-                    baseUrl: 'src',
-                    out: 'dist/js/main.js',
-                    name: '3rd/almond/almond',
-                    mainConfigFile: 'src/main.js',
+                    baseUrl: 'src/scripts',
+                    out: 'dist/scripts/main.js',
+                    name: '../3rd/almond/almond',
+                    mainConfigFile: 'src/scripts/main.js',
                     include: ['app-init'],
                     insertRequire: ['app-init'],
                     optimize: 'uglify2',
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                 options: {
                     patterns: [{
                         match: /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-                        replacement: '<script src="js/main.js"></script>',
+                        replacement: '<script src="/scripts/main.js"></script>',
                         expression: true
                     }]
                 },

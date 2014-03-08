@@ -58,6 +58,7 @@ if (app.get('env') == 'production') {
 }
 
 app.set('port', process.env.PORT || 3000);
+app.set('view engine', 'html');
 app.set('views', staticPath);
 app.engine('html', ejs.renderFile);
 app.use(express.compress());
@@ -77,12 +78,12 @@ app.use(express.session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(app.router);
 app.use(express.static(staticPath));
+app.use(app.router);
 
 app.use(function(req, res) {
   res.status(404);
-  //res.render('404');
+  res.render('404');
 });
 app.use(express.errorHandler());
 
@@ -91,6 +92,14 @@ app.use(express.errorHandler());
  */
 
 app.get('/', homeController.index);
+app.get('/generator/new', homeController.index);
+app.get('/generator/:tournamentId', homeController.index);
+app.get('/generator/:tournamentId/participants', homeController.index);
+app.get('/generator/:tournamentId/stages', homeController.index);
+app.get('/generator/:tournamentId/stages/new', homeController.index);
+app.get('/generator/:tournamentId/stages/:stageId', homeController.index);
+app.get('/generator/:tournamentId/stages/:stageId/rounds', homeController.index);
+app.get('/generator/:tournamentId/stages/:stageId/preview', homeController.index);
 app.get('/login', homeController.index);
 app.get('/logout', homeController.index);
 app.get('/forgot', homeController.index);
