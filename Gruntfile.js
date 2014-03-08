@@ -47,4 +47,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-replace');
 
     grunt.registerTask('build', ['clean', 'copy', 'requirejs', 'replace']);
+    grunt.registerTask('test', []);
 };
