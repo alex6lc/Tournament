@@ -1,13 +1,28 @@
 module.exports = function (grunt) {
+    'use strict';
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+
+        jshint: {
+            files: ['Gruntfile.js', 'src/**/*.js'],
+            options: {
+                jshintrc: '.jshintrc',
+                ignores: ['src/3rd/**/*.js']
+            }
+        },
         clean: {
-            dist: ["dist"]
+            dist: ['dist']
         },
         copy: {
             dist: {
                 files: [
-                    { expand: true, cwd: 'src', src: ['styles/**'], dest: 'dist/' }
+                    {
+                        expand: true,
+                        cwd: 'src',
+                        src: ['styles/**'],
+                        dest: 'dist/'
+                    }
                 ]
             }
         },
@@ -35,7 +50,8 @@ module.exports = function (grunt) {
                     }]
                 },
                 files: [{
-                    src: 'src/index.html', dest: 'dist/index.html'
+                    src: 'src/index.html',
+                    dest: 'dist/index.html'
                 }]
             }
         }
@@ -45,7 +61,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('build', ['clean', 'copy', 'requirejs', 'replace']);
-    grunt.registerTask('test', []);
+    grunt.registerTask('test', ['jshint']);
 };

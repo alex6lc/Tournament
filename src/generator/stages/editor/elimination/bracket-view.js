@@ -5,6 +5,8 @@ define([
     'tournaments/stages/elimination/bracket-config',
     'generator/stages/editor/elimination/round-view'
 ], function (Marionette, Handlebars, Utils, Config, RoundView) {
+    'use strict';
+
     return  Marionette.CollectionView.extend({
         className: 'clearfix bracket',
         itemView: RoundView,
@@ -12,7 +14,7 @@ define([
             return {
                 bracketPos: this.bracketPos,
                 participants: this.participants
-            }
+            };
         },
 
         initialize: function (options) {
@@ -31,7 +33,7 @@ define([
             this.collection.each(function (round, rIndex) {
                 var newPos = [];
                 round.getMatches().each(function (match, mIndex) {
-                    if(rIndex == 0) {
+                    if (rIndex === 0) {
                         newPos.push(mIndex * (Config.heightMatch + Config.spacerHori) + Config.height + Config.spacerHori);
                     } else {
                         var rPos = pos[rIndex - 1];

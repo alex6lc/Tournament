@@ -5,6 +5,7 @@ define([
     'helpers/utils',
     'hbs!account/signup-tmp'
 ], function ($, Backbone, Marionette, Utils, template) {
+    'use strict';
 
     var View = Marionette.ItemView.extend({
         template: template,

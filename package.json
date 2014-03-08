@@ -1,38 +1,39 @@
 {
-    "name": "Tournament",
-    "version": "0.0.0",
-    "description": "",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/alex6lc/Tournament.git"
-    },
-    "author": "Alexis L-C <alexis.leroux.chartre@gmail.com>",
-    "dependencies": {
-        "async": "0.2.10",
-        "bcrypt-nodejs": "0.0.3",
-        "connect-mongo": "0.4.0",
-        "express": "3.4.8",
-        "express-validator": "1.0.1",
-        "mongoose": "3.8.7",
-        "nodemailer": "0.6.0",
-        "passport": "0.2.0",
-        "passport-local": "0.1.6",
-        "request": "2.34.0",
-        "underscore": "1.6.0",
-        "validator": "3.3.0",
-        "ejs": "~0.8.5"
-    },
-    "devDependencies": {
-        "grunt": "0.4.1",
-        "grunt-contrib-copy": "0.5.0",
-        "grunt-contrib-clean": "0.5.0",
-        "grunt-contrib-requirejs": "0.4.3",
-        "grunt-replace": "0.6.2"
-    },
-    "scripts": {
-        "test": "grunt test"
-    },
-    "engines": {
-        "node": ">=0.10.0"
-    }
+  "name": "Tournament",
+  "version": "0.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alex6lc/Tournament.git"
+  },
+  "author": "Alexis L-C <alexis.leroux.chartre@gmail.com>",
+  "dependencies": {
+    "async": "0.2.10",
+    "bcrypt-nodejs": "0.0.3",
+    "connect-mongo": "0.4.0",
+    "express": "3.4.8",
+    "express-validator": "1.0.1",
+    "mongoose": "3.8.7",
+    "nodemailer": "0.6.0",
+    "passport": "0.2.0",
+    "passport-local": "0.1.6",
+    "request": "2.34.0",
+    "underscore": "1.6.0",
+    "validator": "3.3.0",
+    "ejs": "~0.8.5"
+  },
+  "devDependencies": {
+    "grunt": "0.4.1",
+    "grunt-contrib-copy": "0.5.0",
+    "grunt-contrib-clean": "0.5.0",
+    "grunt-contrib-requirejs": "0.4.3",
+    "grunt-replace": "0.6.2",
+    "grunt-contrib-jshint": "~0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
 }

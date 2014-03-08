@@ -8,6 +8,7 @@ define([
     'generator/stages/editor/elimination/stage-elimination-view',
     'hbs!generator/stages/editor/stage-tmp'
 ], function (_, Backbone, Marionette, Utils, Navigator, StageGroupView, StageEliminationView, template) {
+    'use strict';
 
     return Marionette.Layout.extend({
         template: template,
@@ -31,8 +32,8 @@ define([
 
         serializeData: function () {
             var data = Marionette.Layout.prototype.serializeData.apply(this);
-            data.isGroup = this.model.get("Type") == 0;
-            data.isElimination = this.model.get("Type") == 1;
+            data.isGroup = this.model.get("Type") === 0;
+            data.isElimination = this.model.get("Type") === 1;
             return data;
         },
 
@@ -43,7 +44,7 @@ define([
 
         getStageTypeView: function (type) {
             var View = null;
-            if (type == 0) {
+            if (type === 0) {
                 View = StageGroupView;
             } else {
                 View = StageEliminationView;
@@ -69,9 +70,10 @@ define([
             var stage = this.model;
 
             var data = Utils.serializeObject(event.target);
+            data.Type = parseInt(data.Type, 10);
             stage.set(data);
 
-            if(stage.isNew()) {
+            if (stage.isNew()) {
                 stage.set({
                     Id: Utils.generateGUID()
                 });
@@ -80,10 +82,10 @@ define([
             var stageView = this.stage.currentView;
             stageView.sanitizeView();
 
-            if (data.Type == 0) {
+            if (data.Type === 0) {
                 stage.generateGroupStageRounds();
                 stage.generateGroupStageMatches();
-            } else if (data.Type == 1) {
+            } else if (data.Type === 1) {
                 // Do nothing
             } else {
                 console.error("Unsupported stage type");

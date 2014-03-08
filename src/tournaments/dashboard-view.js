@@ -5,6 +5,7 @@ define([
     'hbs!tournaments/dashboard-tmp',
     'hbs!tournaments/tournament-item-tmp'
 ], function (Marionette, Utils, Navigator, dashboardTemplate, itemTemplate) {
+    'use strict';
 
     var ItemView = Marionette.ItemView.extend({
         template: itemTemplate,

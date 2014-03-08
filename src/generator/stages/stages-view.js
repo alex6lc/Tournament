@@ -5,6 +5,8 @@ define([
     'hbs!generator/stages/stages-tmp',
     'hbs!generator/stages/stage-tmp'
 ], function (Backbone, Marionette, Navigator, stagesTemplate, stageTemplate) {
+    'use strict';
+
     var ItemView = Marionette.ItemView.extend({
         template: stageTemplate,
         triggers: {
@@ -40,13 +42,13 @@ define([
         },
 
         initialize: function () {
-            this.listenTo(this, "itemview:deleteStage", function (view){
+            this.listenTo(this, "itemview:deleteStage", function (view) {
                 this.collection.remove(view.model);
                 this.model.save();
             }, this);
         },
 
-        navigateNewStage: function(event) {
+        navigateNewStage: function (event) {
             event.preventDefault();
             event.stopPropagation();
 

@@ -22,6 +22,8 @@ define([
              RoundsView,
              GroupsView
 ) {
+    'use strict';
+
     var app = null;
     var tournaments = null;
 
@@ -61,7 +63,7 @@ define([
                 var view = new SignupView();
                 app.main.show(view);
             },
-            showNewTournament: function() {
+            showNewTournament: function () {
                 //this is weird
                 var tournament = new tournaments.model();
                 tournaments.add(tournament);
@@ -71,21 +73,21 @@ define([
                 });
                 app.main.show(view);
             },
-            showTournament: function(tournamentId) {
+            showTournament: function (tournamentId) {
                 var tournament = tournaments.get(tournamentId);
                 var view = new TournamentView({
                     model: tournament
                 });
                 app.main.show(view);
             },
-            showParticipants: function(tournamentId) {
+            showParticipants: function (tournamentId) {
                 var tournament = tournaments.get(tournamentId);
                 var view = new ParticipantsView({
                     model: tournament
                 });
                 app.main.show(view);
             },
-            showStages: function(tournamentId) {
+            showStages: function (tournamentId) {
                 var tournament = tournaments.get(tournamentId);
                 var view = new StagesView({
                     model: tournament,
@@ -94,7 +96,7 @@ define([
 
                 app.main.show(view);
             },
-            showNewStage: function(tournamentId) {
+            showNewStage: function (tournamentId) {
                 var tournament = tournaments.get(tournamentId);
                 var view = new StageEditorView({
                     tournament: tournament
@@ -111,7 +113,7 @@ define([
                 });
                 app.main.show(view);
             },
-            showEditRounds: function(tournamentId, stageId) {
+            showEditRounds: function (tournamentId, stageId) {
                 var tournament = tournaments.get(tournamentId);
                 var stage = tournament.get("Stages").get(stageId);
                 var rounds = stage.get("Rounds");
@@ -123,7 +125,7 @@ define([
                 });
                 app.main.show(view);
             },
-            showStagePreview: function(tournamentId, stageId) {
+            showStagePreview: function (tournamentId, stageId) {
                 var tournament = tournaments.get(tournamentId);
                 var stage = tournament.get("Stages").get(stageId);
                 var groups = stage.get("Groups");

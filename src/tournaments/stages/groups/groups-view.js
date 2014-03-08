@@ -4,6 +4,8 @@ define([
     'handlebars',
     'helpers/utils'
 ], function (Marionette, Backbone, Handlebars, Utils) {
+    'use strict';
+
     var Match = Marionette.ItemView.extend({
         template: Handlebars.compile("<div>{{HomeName}} vs {{AwayName}}</div>"),
         serializeData: function () {
@@ -13,7 +15,7 @@ define([
                 AwayName: this.model.get("Away").get("Name"),
                 AwayScore: 0,
                 Winner: 0
-            }
+            };
         }
     });
 
@@ -33,7 +35,7 @@ define([
             return {
                 collection: new Backbone.Collection(matches),
                 model: model
-            }
+            };
         },
 
         initialize: function (options) {
@@ -49,7 +51,7 @@ define([
             rounds: ".js-rounds"
         },
         initialize: function (options) {
-            this.stageModel = options.stageModel
+            this.stageModel = options.stageModel;
         },
 
         onRender: function () {
@@ -68,10 +70,10 @@ define([
         itemViewOptions: function () {
             return {
                 stageModel: this.stageModel
-            }
+            };
         },
         initialize: function (options) {
-            this.stageModel = options.stageModel
+            this.stageModel = options.stageModel;
         }
     });
 

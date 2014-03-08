@@ -1,8 +1,11 @@
 define([
+    'jquery',
     'marionette',
     'handlebars',
     'generator/stages/editor/participant-label-view'
-], function (Marionette, Handlebars, ParticipantLabelView) {
+], function ($, Marionette, Handlebars, ParticipantLabelView) {
+    'use strict';
+
     return Marionette.CompositeView.extend({
         className: 'group-editor',
         template: Handlebars.compile('<div>{{Title}}<a href="#" class="js-delete">X</a></div><ul class="js-selectable"></ul>'),

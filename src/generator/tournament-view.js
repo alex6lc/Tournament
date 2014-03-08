@@ -5,6 +5,7 @@ define([
     'helpers/navigator',
     'hbs!generator/tournament-tmp'
 ], function (Backbone, Marionette, Utils, Navigator, template) {
+    'use strict';
 
     var View = Marionette.ItemView.extend({
         template: template,
@@ -19,7 +20,7 @@ define([
             event.stopPropagation();
 
             var data = Utils.serializeObject(event.target);
-            this.model.save(data).done(function(){
+            this.model.save(data).done(function () {
                 Navigator("/generator/" + self.model.id + "/participants");
             });
         }

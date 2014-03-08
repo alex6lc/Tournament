@@ -7,6 +7,8 @@ define([
     'generator/stages/editor/elimination/bracket-view',
     'hbs!generator/stages/editor/elimination/stage-elimination-tmp'
 ], function (ui, _, Marionette, Utils, ParticipantsLabelView, BracketView, template) {
+    'use strict';
+
     return Marionette.Layout.extend({
         template: template,
 
@@ -18,7 +20,7 @@ define([
         initialize: function (options) {
             this.tournament = options.tournament;
 
-            if(this.model.isNew()) {
+            if (this.model.isNew()) {
                 var nbParticipants = this.tournament.get("Participants").length;
                 this.model.generateSingleEliminationStage(nbParticipants);
             }
@@ -43,7 +45,7 @@ define([
         getUnassignedParticipants: function () {
             var clone = this.tournament.get("Participants").clone();
             var list = [];
-            this.model.get("Matches").each(function(m){
+            this.model.get("Matches").each(function (m) {
                 list.push(m.get("Home"));
                 list.push(m.get("Away"));
             });

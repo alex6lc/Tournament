@@ -7,6 +7,8 @@ define([
     'generator/stages/editor/group/groups-view',
     'hbs!generator/stages/editor/group/stage-group-tmp'
 ], function (ui, _, Marionette, Utils, ParticipantsLabelView, GroupsView, template) {
+    'use strict';
+
     return Marionette.Layout.extend({
         template: template,
 

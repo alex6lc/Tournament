@@ -5,6 +5,7 @@ define([
     'relational',
     'localstorage'
 ], function (_, Backbone, Utils) {
+    'use strict';
 
     var Participant = Backbone.RelationalModel.extend({
         idAttribute: "Id",
@@ -72,17 +73,20 @@ define([
         },
         getNumberOfRound: function () {
             var nbPerGroup = this._getMaxNbParticipants();
-            var isEven = nbPerGroup % 2 == 0;
+            var isEven = nbPerGroup % 2 === 0;
             var nbMatches = this._getNumberOfMatches(nbPerGroup);
 
-            var numberOfRound = isEven
-                ? nbMatches / (nbPerGroup / 2)
-                : nbMatches / ((nbPerGroup - 1) / 2);
+            var numberOfRound;
+            if (isEven) {
+                numberOfRound = nbMatches / (nbPerGroup / 2);
+            } else {
+                numberOfRound = nbMatches / ((nbPerGroup - 1) / 2);
+            }
 
             return numberOfRound;
         },
         _getMaxNbParticipants: function () {
-            var maxGroup = this.max(function (group){
+            var maxGroup = this.max(function (group) {
                 return group.get("Participants").length;
             });
             return maxGroup.get("Participants").length;
@@ -91,7 +95,7 @@ define([
             return Math.ceil(nbParticipants / numberOfGroup);
         },
         _getNumberOfMatches: function (nbPerGroup) {
-            return nbPerGroup/2*(nbPerGroup - 1);
+            return nbPerGroup / 2 * (nbPerGroup - 1);
         }
     });
 
@@ -102,17 +106,17 @@ define([
             key: 'Round',
             relatedModel: Round,
             includeInJSON: "Id"
-        },{
+        }, {
             type: 'HasOne',
             key: 'Group',
             relatedModel: Group,
             includeInJSON: "Id"
-        },{
+        }, {
             type: 'HasOne',
             key: 'Home',
             relatedModel: Participant,
             includeInJSON: "Id"
-        },{
+        }, {
             type: 'HasOne',
             key: 'Away',
             relatedModel: Participant,
@@ -136,7 +140,7 @@ define([
             key: 'Groups',
             relatedModel: Group,
             collectionType: Groups
-        },{
+        }, {
             type: 'HasMany',
             key: 'Rounds',
             relatedModel: Round,
@@ -144,7 +148,7 @@ define([
             reverseRelation: {
                 key: 'Stage'
             }
-        },{
+        }, {
             type: 'HasMany',
             key: 'Matches',
             relatedModel: Match,
@@ -199,7 +203,7 @@ define([
                 var participants = group.get("Participants").clone();
                 for (var round = 0; round < numRounds; round++) {
                     var num = (participants.length / 2);
-                    for(var i = 0; i < num; i++) {
+                    for (var i = 0; i < num; i++) {
                         matches.add({
                             Id: Utils.generateGUID(),
                             Round: rounds.at(round),

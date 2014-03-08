@@ -4,6 +4,8 @@ define([
     'helpers/utils',
     'generator/stages/editor/group/group-view'
 ], function (Marionette, Handlebars, Utils, GroupView) {
+    'use strict';
+
     return  Marionette.CompositeView.extend({
         className: 'clearfix',
         itemView: GroupView,

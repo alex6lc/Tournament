@@ -4,6 +4,8 @@ define([
     'tournaments/stages/elimination/bracket-config',
     'hbs!generator/stages/editor/elimination/round-tmp'
 ], function (Marionette, MatchView, Config, RoundTemplate) {
+    'use strict';
+
     return Marionette.CompositeView.extend({
         template: RoundTemplate,
 
@@ -13,7 +15,7 @@ define([
             return {
                 bracketPos: this.bracketPos,
                 participants: this.participants
-            }
+            };
         },
 
         ui: {
@@ -55,30 +57,33 @@ define([
 
             if (canvas.getContext) {
                 var context = canvas.getContext('2d');
-                context.strokeStyle = Config.strokeStyle;
-                context.fillStyle = Config.fillStyle;
-                context.lineWidth = Config.lineWidth;
+                this._drawBracket(context);
+            }
+        },
+        _drawBracket: function (context) {
+            context.strokeStyle = Config.strokeStyle;
+            context.fillStyle = Config.fillStyle;
+            context.lineWidth = Config.lineWidth;
 
-                var line = Config.lineWidth % 2 ? 0.5 : 0;
-                var halfMatchHeight = Math.floor(Config.heightMatch / 2) + line;
-                var halfSpacer = Math.floor(Config.spacerVerc / 2) + line;
+            var line = Config.lineWidth % 2 ? 0.5 : 0;
+            var halfMatchHeight = Math.floor(Config.heightMatch / 2) + line;
+            var halfSpacer = Math.floor(Config.spacerVerc / 2) + line;
 
-                var roundIndex = this.model.collection.indexOf(this.model);
-                var pos = this.bracketPos[roundIndex];
+            var roundIndex = this.model.collection.indexOf(this.model);
+            var pos = this.bracketPos[roundIndex];
 
-                for (var p = 0; p <= pos.length; p = p + 2) {
-                    context.beginPath();
-                    context.moveTo(0, pos[p] + halfMatchHeight);
-                    context.lineTo(halfSpacer, pos[p] + halfMatchHeight);
-                    context.lineTo(halfSpacer, pos[p + 1] + halfMatchHeight);
-                    context.lineTo(0, pos[p + 1] + halfMatchHeight);
-                    context.stroke();
+            for (var p = 0; p <= pos.length; p = p + 2) {
+                context.beginPath();
+                context.moveTo(0, pos[p] + halfMatchHeight);
+                context.lineTo(halfSpacer, pos[p] + halfMatchHeight);
+                context.lineTo(halfSpacer, pos[p + 1] + halfMatchHeight);
+                context.lineTo(0, pos[p + 1] + halfMatchHeight);
+                context.stroke();
 
-                    context.beginPath();
-                    context.moveTo(halfSpacer, Math.floor((pos[p] + pos[p + 1]) / 2) + halfMatchHeight);
-                    context.lineTo(Config.spacerVerc, Math.floor((pos[p] + pos[p + 1]) / 2) + halfMatchHeight);
-                    context.stroke()
-                }
+                context.beginPath();
+                context.moveTo(halfSpacer, Math.floor((pos[p] + pos[p + 1]) / 2) + halfMatchHeight);
+                context.lineTo(Config.spacerVerc, Math.floor((pos[p] + pos[p + 1]) / 2) + halfMatchHeight);
+                context.stroke();
             }
         }
     });

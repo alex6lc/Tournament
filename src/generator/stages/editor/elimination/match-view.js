@@ -1,9 +1,12 @@
 define([
+    'jquery',
     'marionette',
     'generator/stages/editor/participant-label-view',
     'tournaments/stages/elimination/bracket-config',
     'hbs!generator/stages/editor/elimination/match-tmp'
-], function (Marionette, ParticipantLabelView, conf, MatchTemplate) {
+], function ($, Marionette, ParticipantLabelView, conf, MatchTemplate) {
+    'use strict';
+
     return Marionette.Layout.extend({
         className: 'team-bracket',
         tagName: 'table',
@@ -20,8 +23,10 @@ define([
             this.participants = options.participants;
         },
 
-        renderParticipant: function(region, prop) {
-            if (!this.model.has(prop)) return;
+        renderParticipant: function (region, prop) {
+            if (!this.model.has(prop)) {
+                return;
+            }
 
             var homeView = new ParticipantLabelView({
                 model: this.model.get(prop)

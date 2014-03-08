@@ -1,4 +1,6 @@
 define([], function () {
+    'use strict';
+
     var conf = {};
     conf.heightMatch = 46;
     conf.widthMatch = 200;

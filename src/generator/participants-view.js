@@ -6,6 +6,7 @@ define([
     'helpers/navigator',
     'hbs!generator/participants-tmp'
 ], function (_, Backbone, Marionette, Utils, Navigator, template) {
+    'use strict';
 
     var View = Marionette.ItemView.extend({
         template: template,
@@ -18,7 +19,7 @@ define([
             if (participants) {
                 var names = "";
                 participants.each(function (p, index) {
-                    names += p.get("Name")
+                    names += p.get("Name");
 
                     var isLast = index === participants.length - 1;
                     if (!isLast) {
@@ -49,14 +50,14 @@ define([
             });
 
             var worstCheckEver = this.model.get("Participants").length === newData.length;
-            if(worstCheckEver) {
+            if (worstCheckEver) {
                 Navigator("/generator/" + self.model.id + "/stages");
                 return;
             }
 
             this.model.get("Participants").reset(newData);
 
-            this.model.save().done(function(){
+            this.model.save().done(function () {
                 Navigator("/generator/" + self.model.id + "/stages");
             });
         }

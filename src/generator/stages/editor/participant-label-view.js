@@ -2,6 +2,8 @@ define([
     'marionette',
     'handlebars'
 ], function (Marionette, Handlebars) {
+    'use strict';
+
     return Marionette.ItemView.extend({
         tagName: 'li',
         className: 'participant-label',
