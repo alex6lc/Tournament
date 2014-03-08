@@ -4,11 +4,11 @@
 
 var express = require('express');
 var MongoStore = require('connect-mongo')(express);
-var flash = require('express-flash');
 var path = require('path');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var expressValidator = require('express-validator');
+var ejs = require('ejs');
 
 /**
  * API keys + Passport configuration.
@@ -50,9 +50,16 @@ var day = (hour * 24);
 var week = (day * 7);
 var month = (day * 30);
 
+var staticPath = "";
+if (app.get('env') == 'production') {
+    staticPath = path.join(__dirname, 'dist');
+} else {
+    staticPath = path.join(__dirname, 'src');
+}
+
 app.set('port', process.env.PORT || 3000);
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
+app.set('views', staticPath);
+app.engine('html', ejs.renderFile);
 app.use(express.compress());
 app.use(express.favicon());
 app.use(express.logger('dev'));
@@ -68,18 +75,11 @@ app.use(express.session({
     auto_reconnect: true
   })
 }));
-//app.use(express.csrf());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next) {
-  res.locals.user = req.user;
-  //res.locals.token = req.csrfToken();
-  res.locals.secrets = secrets;
-  next();
-});
-app.use(flash());
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'src')));
+app.use(express.static(staticPath));
+
 app.use(function(req, res) {
   res.status(404);
   //res.render('404');

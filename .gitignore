@@ -25,4 +25,7 @@ _ReSharper*/
 node_modules/
 
 # Bower
-src/3rd
+src/3rd/
+
+# Build
+dist/

@@ -5,6 +5,13 @@ require.config({
         },
         'jqueryui': {
             deps: ['jquery']
+        },
+        'underscore': {
+            exports: '_'
+        },
+        'backbone': {
+            deps: ['jquery', 'underscore'],
+            exports: 'Backbone'
         }
     },
     paths: {
@@ -26,6 +33,4 @@ require.config({
     }
 });
 
-require(['app'], function (app) {
-    app.start();
-});
+require(['app-init']);

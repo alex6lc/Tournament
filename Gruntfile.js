@@ -1,52 +1,50 @@
-var LIVERELOAD_PORT = 35729;
-
 module.exports = function (grunt) {
     grunt.initConfig({
-        connect: {
-            server: {
-                options: {
-                    port: 9000,
-                    hostname: 'localhost',
-                    base: "src",
-                    livereload: LIVERELOAD_PORT
-                }
-            }
-        },
-        open: {
-            server: {
-                url: 'http://localhost:<%= connect.server.options.port %>/index.html'
-            }
-        },
-        watch: {
-            scripts: {
-                files: [
-                    'src/**/*.js',
-                    'src/**/*.html',
-                    'src/**/*.css',
-                ],
-                options: {
-                    livereload: LIVERELOAD_PORT
-                }
-            }
+        pkg: grunt.file.readJSON('package.json'),
+        clean: {
+            dist: ["dist"]
         },
         copy: {
-            dev: {
-                src: 'src/main.js',
-                dest: 'src/dest/'
+            dist: {
+                files: [
+                    { expand: true, cwd: 'src', src: ['styles/**'], dest: 'dist/' }
+                ]
+            }
+        },
+        requirejs: {
+            dist: {
+                options: {
+                    baseUrl: 'src',
+                    out: 'dist/js/main.js',
+                    name: '3rd/almond/almond',
+                    mainConfigFile: 'src/main.js',
+                    include: ['app-init'],
+                    insertRequire: ['app-init'],
+                    optimize: 'uglify2',
+                    wrap: false
+                }
+            }
+        },
+        replace: {
+            dist: {
+                options: {
+                    patterns: [{
+                        match: /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+                        replacement: '<script src="js/main.js"></script>',
+                        expression: true
+                    }]
+                },
+                files: [{
+                    src: 'src/index.html', dest: 'dist/index.html'
+                }]
             }
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-open');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-replace');
 
-    grunt.registerTask('server', [
-        'connect',
-        'open',
-        'watch'
-    ]);
-
-    grunt.registerTask('dev', ['copy:dev']);
+    grunt.registerTask('build', ['clean', 'copy', 'requirejs', 'replace']);
 };
