@@ -25,6 +25,9 @@ define([
 
         renderParticipant: function (region, prop) {
             if (!this.model.has(prop)) {
+                if (this.model.isAvailable(prop)) {
+                    this.$(region.el).css('background-color', 'green');
+                }
                 return;
             }
 
@@ -40,10 +43,9 @@ define([
 
             var round = this.model.get("Round");
             var roundIndex = round.collection.indexOf(round);
-            var indexMatches = round.getMatches().indexOf(this.model);
+            var indexMatch = round.getMatchIndex(this.model);
 
-            var value = this.bracketPos[roundIndex][indexMatches];
-
+            var value = this.bracketPos[roundIndex][indexMatch];
             this.$el.css('height', conf.heightMatch);
             this.$el.css('width', conf.widthMatch);
             this.$el.css('top', value);

@@ -31,8 +31,28 @@ define([
             BestOf: 1
         },
         getMatches: function () {
-            var m = this.get("Stage").get("Matches").clone().where({ Round: this });
-            return new Matches(m);
+            var clone = this.get("Stage").get("Matches").where({ Round: this });
+            return new Matches(clone);
+        },
+        getMatchIndex: function (match) {
+            var matches = this.get("Stage").get("Matches").where({ Round: this });
+            return _.indexOf(matches, match);
+        },
+        getNextRound: function () {
+            var index = this.collection.indexOf(this);
+            if (index === this.collection.length) {
+                return null;
+            } else {
+                return this.collection.at(index + 1);
+            }
+        },
+        getPrevRound: function () {
+            var index = this.collection.indexOf(this);
+            if (index === 0) {
+                return null;
+            } else {
+                return this.collection.at(index - 1);
+            }
         }
     });
     var Rounds = Backbone.Collection.extend({
@@ -121,7 +141,49 @@ define([
             key: 'Away',
             relatedModel: Participant,
             includeInJSON: "Id"
-        }]
+        }],
+        hasParticipant: function () {
+            return this.has("Home") || this.has("Away");
+        },
+        getNextMatch: function () {
+            var round = this.get("Round");
+
+            var nextRound = round.getNextRound();
+            if (nextRound === null) {
+                return null;
+            }
+
+            var matchIndex = round.getMatchIndex(this);
+            var nextMatchIndex = Math.floor(matchIndex / 2);
+
+            var nextMatches = this.collection.where({ Round: nextRound });
+            return nextMatches[nextMatchIndex];
+        },
+        getPrevMatch: function (homeOrAway) {
+            var round = this.get("Round");
+
+            var prevRound = round.getPrevRound();
+            if (prevRound === null) {
+                return null;
+            }
+
+            var matchIndex = round.getMatchIndex(this);
+            var prevMatchIndex = matchIndex * 2;
+
+            var prevMatches = this.collection.where({ Round: prevRound });
+            if (homeOrAway === "Home") {
+                return prevMatches[prevMatchIndex];
+            } else {
+                return prevMatches[prevMatchIndex + 1];
+            }
+        },
+        isAvailable: function (homeOrAway) {
+            var prev = this.getPrevMatch(homeOrAway);
+            var next = this.getNextMatch();
+
+
+            return !((prev && prev.hasParticipant()) || (next && next.hasParticipant()));
+        }
     });
 
     var Matches = Backbone.Collection.extend({
