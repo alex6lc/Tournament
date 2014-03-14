@@ -12,6 +12,9 @@ require.config({
         'backbone': {
             deps: ['jquery', 'underscore'],
             exports: 'Backbone'
+        },
+        'relational': {
+            deps: ['backbone']
         }
     },
     paths: {
