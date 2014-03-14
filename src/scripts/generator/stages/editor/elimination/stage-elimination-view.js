@@ -55,7 +55,8 @@ define([
 
         setUISortable: function () {
             this.participants.$el.find(".js-selectable").sortable({
-                connectWith: ".js-selectable"
+                connectWith: ".js-selectable",
+                placeholder: "test-class"
             });
         },
 

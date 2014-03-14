@@ -28,10 +28,10 @@ define([
                 return;
             }
 
-            var homeView = new ParticipantLabelView({
+            var view = new ParticipantLabelView({
                 model: this.model.get(prop)
             });
-            region.show(homeView);
+            region.show(view);
         },
 
         onRender: function () {
@@ -50,6 +50,7 @@ define([
 
             this.$(".js-selectable").sortable({
                 connectWith: ".js-selectable",
+                placeholder: "test-class",
                 receive: function (event, ui) {
                     var $list = $(this);
                     if ($list.children().length > 1) {

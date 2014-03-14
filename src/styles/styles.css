@@ -63,6 +63,16 @@
     margin: 0;
     padding: 0;
     width: 120px;
+
+}
+
+.team-bracket .test-class:not(:only-child) {
+    display: none;
+}
+
+.team-bracket .test-class {
+    background-color: green;
+    height: 10px;
 }
 
 .team-bracket
