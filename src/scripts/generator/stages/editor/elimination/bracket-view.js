@@ -28,6 +28,12 @@ define([
             });
         },
 
+        renderParticipants: function () {
+            this.children.each(function (view) {
+                view.renderParticipants();
+            });
+        },
+
         calculateBracketPos: function () {
             var pos = [];
             this.collection.each(function (round, rIndex) {

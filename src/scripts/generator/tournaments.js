@@ -40,7 +40,7 @@ define([
         },
         getNextRound: function () {
             var index = this.collection.indexOf(this);
-            if (index === this.collection.length) {
+            if (index === this.collection.length - 1) {
                 return null;
             } else {
                 return this.collection.at(index + 1);
@@ -179,10 +179,18 @@ define([
         },
         isAvailable: function (homeOrAway) {
             var prev = this.getPrevMatch(homeOrAway);
+
+            return !((prev && prev.hasParticipant()) || this.nextSpotHasParticipant());
+        },
+        nextSpotHasParticipant: function () {
             var next = this.getNextMatch();
-
-
-            return !((prev && prev.hasParticipant()) || (next && next.hasParticipant()));
+            if (next === null) {
+                return false;
+            }
+            var round = this.get("Round");
+            var matchIndex = round.getMatchIndex(this);
+            var goToHomeOrAway = (matchIndex % 2 === 0) ? "Home" : "Away";
+            return next.has(goToHomeOrAway);
         }
     });
 

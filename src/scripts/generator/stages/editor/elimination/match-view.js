@@ -24,11 +24,16 @@ define([
         },
 
         renderParticipant: function (region, prop) {
+            var $region = this.$(region.el);
             if (!this.model.has(prop)) {
                 if (this.model.isAvailable(prop)) {
-                    this.$(region.el).css('background-color', 'green');
+                    $region.addClass('valid');
+                } else {
+                    $region.removeClass('valid');
                 }
                 return;
+            } else {
+                $region.removeClass('valid');
             }
 
             var view = new ParticipantLabelView({
@@ -37,9 +42,13 @@ define([
             region.show(view);
         },
 
-        onRender: function () {
+        renderParticipants: function () {
             this.renderParticipant(this.home, "Home");
             this.renderParticipant(this.away, "Away");
+        },
+
+        onRender: function () {
+            this.renderParticipants();
 
             var round = this.model.get("Round");
             var roundIndex = round.collection.indexOf(round);
@@ -49,23 +58,21 @@ define([
             this.$el.css('height', conf.heightMatch);
             this.$el.css('width', conf.widthMatch);
             this.$el.css('top', value);
-
-            this.$(".js-selectable").sortable({
-                connectWith: ".js-selectable",
-                placeholder: "test-class",
-                receive: function (event, ui) {
-                    var $list = $(this);
-                    if ($list.children().length > 1) {
-                        $(ui.sender).sortable('cancel');
-                    }
-                }
-            });
         },
         bindParticipants: function () {
-            var $li = this.$("li");
+            var id = null, $p = null, home = null, away = null;
 
-            var home = this.participants.get($li.eq(0).find("span").data("id"));
-            var away = this.participants.get($li.eq(1).find("span").data("id"));
+            $p = this.$(this.home.el).find(".participant-label");
+            if ($p.length > 0) {
+                id = $p.find("span").data("id");
+                home = this.participants.get(id);
+            }
+
+            $p = this.$(this.away.el).find(".participant-label");
+            if ($p.length > 0) {
+                id = $p.find("span").data("id");
+                away = this.participants.get(id);
+            }
 
             this.model.set("Home", home, { silent: true });
             this.model.set("Away", away, { silent: true });

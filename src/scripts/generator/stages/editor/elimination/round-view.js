@@ -36,6 +36,13 @@ define([
             });
         },
 
+        renderParticipants: function () {
+            this.children.each(function (view) {
+                view.renderParticipants();
+            });
+        },
+
+
         onRender: function () {
             var maxMatches = this.model.collection.first().getMatches().length;
             var totalHeight = maxMatches * (Config.heightMatch + Config.spacerHori) + Config.height + Config.spacerHori;

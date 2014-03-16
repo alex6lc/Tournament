@@ -1,4 +1,5 @@
 define([
+    'jquery',
     'jqueryui',
     'underscore',
     'marionette',
@@ -6,7 +7,7 @@ define([
     'generator/stages/editor/participants-label-view',
     'generator/stages/editor/elimination/bracket-view',
     'hbs!generator/stages/editor/elimination/stage-elimination-tmp'
-], function (ui, _, Marionette, Utils, ParticipantsLabelView, BracketView, template) {
+], function ($, ui, _, Marionette, Utils, ParticipantsLabelView, BracketView, template) {
     'use strict';
 
     return Marionette.Layout.extend({
@@ -54,9 +55,29 @@ define([
         },
 
         setUISortable: function () {
-            this.participants.$el.find(".js-selectable").sortable({
+            var self = this;
+
+            this.participantsView.$el.sortable({
                 connectWith: ".js-selectable",
-                placeholder: "test-class"
+                placeholder: "test-class",
+                receive: function () {
+                    self.sanitizeView();
+                    self.bracketView.renderParticipants();
+                }
+            });
+
+            this.bracketView.$(".js-selectable").sortable({
+                connectWith: ".js-selectable",
+                placeholder: "test-class",
+                receive: function (event, ui) {
+                    var $list = $(this);
+                    if (!$list.hasClass("valid")) {
+                        $(ui.sender).sortable('cancel');
+                    } else {
+                        self.sanitizeView();
+                        self.bracketView.renderParticipants();
+                    }
+                }
             });
         },
 

@@ -66,12 +66,15 @@
 
 }
 
+.team-bracket .valid {
+    background-color: green;
+}
+
 .team-bracket .test-class:not(:only-child) {
     display: none;
 }
 
 .team-bracket .test-class {
-    background-color: green;
     height: 10px;
 }
 
