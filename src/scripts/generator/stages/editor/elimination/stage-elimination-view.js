@@ -18,13 +18,47 @@ define([
             rounds: '.js-rounds'
         },
 
+        events: {
+            'click .js-reset': 'reset',
+            'click .js-auto-assign': 'autoAssign'
+        },
+
+
         initialize: function (options) {
             this.tournament = options.tournament;
 
-            if (this.model.isNew() || this.model.changedAttributes(['type'])) {
+            if (this.model.isNew() || this.model.hasChanged('type')) {
                 var nbParticipants = this.tournament.get("Participants").length;
                 this.model.generateSingleEliminationStage(nbParticipants);
             }
+        },
+
+        reset: function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            this.model.get("Matches").each(function (match) {
+                match.set({
+                    Home: null,
+                    Away: null
+                }, { silent: true });
+            });
+
+            this.render();
+        },
+
+        autoAssign: function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            this.model.get("Matches").each(function (match) {
+                match.set({
+                    Home: null,
+                    Away: null
+                }, { silent: true });
+            });
+
+            this.render();
         },
 
         onRender: function () {
