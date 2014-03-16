@@ -52,7 +52,7 @@ define([
             event.preventDefault();
             event.stopPropagation();
 
-            var col = null;
+            var groupParticipants = null;
             var groups = this.model.get("Groups");
             var participants = this.tournament.get("Participants").clone();
 
@@ -61,18 +61,17 @@ define([
             });
 
             var numGroups = groups.length;
-            var groupSize = participants.length / numGroups;
-
             var pLength = participants.length;
+            var groupSize = pLength / numGroups;
 
             for (var j = 0; j < Math.ceil(groupSize / 2); j++) {
                 for (var g = 0; g < numGroups; g++) {
-                    var a = j * numGroups + g;
+                    var pIndex = j * numGroups + g;
 
-                    col = groups.at(g).get("Participants");
-                    col.add(participants.at(a), { silent: true});
-                    if (col.length < groupSize) {
-                        col.add(participants.at(pLength - 1 - a), { silent: true});
+                    groupParticipants = groups.at(g).get("Participants");
+                    groupParticipants.add(participants.at(pIndex), { silent: true});
+                    if (groupParticipants.length < groupSize) {
+                        groupParticipants.add(participants.at(pLength - 1 - pIndex), { silent: true});
                     }
                 }
             }
