@@ -52,19 +52,29 @@ define([
             event.preventDefault();
             event.stopPropagation();
 
-            var groups = this.model.get("Groups");
-            var index = 0;
             var col = null;
+            var groups = this.model.get("Groups");
             var participants = this.tournament.get("Participants").clone();
 
             groups.each(function (group) {
                 group.get("Participants").reset([], { silent: true });
             });
 
-            for (var i = 0; i < participants.length; i++) {
-                index = Math.floor(i * groups.length / participants.length);
-                col = groups.models[index].get("Participants");
-                col.add(participants.at(i), { silent: true});
+            var numGroups = groups.length;
+            var groupSize = participants.length / numGroups;
+
+            var pLength = participants.length;
+
+            for (var j = 0; j < Math.ceil(groupSize / 2); j++) {
+                for (var g = 0; g < numGroups; g++) {
+                    var a = j * numGroups + g;
+
+                    col = groups.at(g).get("Participants");
+                    col.add(participants.at(a), { silent: true});
+                    if (col.length < groupSize) {
+                        col.add(participants.at(pLength - 1 - a), { silent: true});
+                    }
+                }
             }
 
             this.render();
