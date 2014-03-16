@@ -21,7 +21,7 @@ define([
         initialize: function (options) {
             this.tournament = options.tournament;
 
-            if (this.model.isNew()) {
+            if (this.model.isNew() || this.model.changedAttributes(['type'])) {
                 var nbParticipants = this.tournament.get("Participants").length;
                 this.model.generateSingleEliminationStage(nbParticipants);
             }

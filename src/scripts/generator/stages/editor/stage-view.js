@@ -56,6 +56,10 @@ define([
             });
         },
         changeType: function () {
+            this.model.get("Matches").reset([], { silent: true });
+            this.model.get("Groups").reset([], { silent: true });
+            this.model.get("Rounds").reset([], { silent: true });
+
             var type = this.$(".js-stage-type").val();
             this.stage.show(this.getStageTypeView(parseInt(type, 10)));
         },
