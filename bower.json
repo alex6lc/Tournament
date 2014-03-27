@@ -12,6 +12,7 @@
     "marionette": "1.6.2",
     "backbone.localStorage": "1.1.7",
     "jquery-ui": "1.10.4",
-    "almond": "0.2.9"
+    "almond": "0.2.9",
+    "semantic": "~0.15.1"
   }
 }
