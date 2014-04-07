@@ -5,16 +5,6 @@ require.config({
         },
         'jqueryui': {
             deps: ['jquery']
-        },
-        'underscore': {
-            exports: '_'
-        },
-        'backbone': {
-            deps: ['jquery', 'underscore'],
-            exports: 'Backbone'
-        },
-        'relational': {
-            deps: ['backbone']
         }
     },
     paths: {
