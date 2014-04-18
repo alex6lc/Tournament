@@ -1,23 +1,25 @@
-<form action="#" method="post">
-    <div>
+<h2 class="ui dividing header">Tournament</h2>
+
+<form action="#" method="post" class="ui form">
+    <div class="field">
         <label for="Title">Title</label>
-        <input class="text-box single-line" id="Title" name="Title" type="text" value="{{Title}}">
+        <input id="Title" name="Title" type="text" value="{{Title}}">
     </div>
-    <div>
+    <div class="field">
         <label for="Location">Location</label>
-        <input class="text-box single-line" id="Location" name="Location" type="text" value="{{Location}}">
+        <input id="Location" name="Location" type="text" value="{{Location}}">
     </div>
-    <div>
+    <div class="field">
         <label for="Description">Description</label>
         <textarea cols="20" id="Description" name="Description" rows="2">{{Description}}</textarea>
     </div>
-    <div>
+    <div class="field">
         <label for="Sponsors">Sponsors</label>
         <textarea cols="20" id="Sponsors" name="Sponsors" rows="2">{{Sponsors}}</textarea>
     </div>
-    <div>
+    <div class="field">
         <label for="Date">Date</label>
-        <input class="text-box single-line" id="Date" name="Date" type="text" value="{{Date}}">
+        <input id="Date" name="Date" type="text" value="{{Date}}">
     </div>
 
     <input type="submit" value="Next">

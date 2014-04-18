@@ -1,8 +1,48 @@
+html, body {
+    font-size: 15px;
+}
+
+body {
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    background: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    color: #555555;
+    text-rendering: optimizeLegibility;
+}
+
+#t .container {
+    width: auto;
+    margin-right: 150px;
+    margin-left: 300px;
+}
+
+#t .sidebar {
+    position: absolute;
+    margin-left: 0 !important;
+    top: 4.5rem;
+    left: 0;
+}
+
+#t .sidebar .item > i.icon {
+    float: none;
+    margin: 0 .83em 0 0;
+}
+
+#t .top-menu {
+    border-radius: 0 !important;
+}
+
+#t .top-menu .item {
+    padding: 1.75em .95em;
+}
+
 #debug {
     position: absolute;
     right: 0;
     top: 0;
-    width: 500px
+    width: 500px;
+    display: none;
 }
 
 .group-editor ul,
