@@ -27,7 +27,7 @@ define([
         initialize: function (options) {
             this.tournament = options.tournament;
 
-            if (this.model.isNew() || this.model.hasChanged('type')) {
+            if (this.model.isNew() || this.model.hasChanged('Type')) {
                 var nbParticipants = this.tournament.get("Participants").length;
                 this.model.generateSingleEliminationStage(nbParticipants);
             }
@@ -44,7 +44,7 @@ define([
                 }, { silent: true });
             });
 
-            this.render();
+            this.onShow();
         },
 
         autoAssign: function (event) {
@@ -58,10 +58,10 @@ define([
                 }, { silent: true });
             });
 
-            this.render();
+            this.onShow();
         },
 
-        onRender: function () {
+        onShow: function () {
             this.participantsView = new ParticipantsLabelView({
                 collection: this.getUnassignedParticipants()
             });

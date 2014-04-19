@@ -17,14 +17,22 @@ body {
     margin-left: 300px;
 }
 
-#t .sidebar {
+#t .side-menu {
     position: absolute;
-    margin-left: 0 !important;
+    margin: 0;
     top: 4.5rem;
     left: 0;
+    width: 275px;
+    border-radius: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    -ms-overflow-y: auto;
+    overflow-y: auto;
 }
 
-#t .sidebar .item > i.icon {
+#t .side-menu .item > i.icon {
     float: none;
     margin: 0 .83em 0 0;
 }
@@ -75,19 +83,16 @@ body {
     width: 200px;
 }
 
-.bracket
-{
+.bracket {
     position: relative;
     display: block;
+    overflow: hidden;
 }
 
-.round-bracket
-{
+.round-bracket {
     float: left;
-    display: inline-block;
 }
-.round-header
-{
+.round-header {
     border: 1px solid #000000;
     text-align: center;
     line-height: 20px;
@@ -103,7 +108,6 @@ body {
     margin: 0;
     padding: 0;
     width: 120px;
-
 }
 
 .team-bracket .valid {

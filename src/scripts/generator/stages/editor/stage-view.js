@@ -37,7 +37,7 @@ define([
             return data;
         },
 
-        onRender: function () {
+        onShow: function () {
             var type = this.model.get("Type");
             this.stage.show(this.getStageTypeView(type));
         },
@@ -56,12 +56,14 @@ define([
             });
         },
         changeType: function () {
+            var type = parseInt(this.$(".js-stage-type").val(), 10);
+
             this.model.get("Matches").reset([], { silent: true });
             this.model.get("Groups").reset([], { silent: true });
             this.model.get("Rounds").reset([], { silent: true });
+            this.model.set("Type", type);
 
-            var type = this.$(".js-stage-type").val();
-            this.stage.show(this.getStageTypeView(parseInt(type, 10)));
+            this.stage.show(this.getStageTypeView(type));
         },
 
         saveForm: function (event) {

@@ -1,14 +1,16 @@
 define([
     'marionette',
-    'handlebars',
-    'helpers/utils',
+    'iscroll',
     'tournaments/stages/elimination/bracket-config',
-    'generator/stages/editor/elimination/round-view'
-], function (Marionette, Handlebars, Utils, Config, RoundView) {
+    'generator/stages/editor/elimination/round-view',
+    'hbs!generator/stages/editor/elimination/bracket-tmp'
+], function (Marionette, IScroll, Config, RoundView, Template) {
     'use strict';
 
-    return  Marionette.CollectionView.extend({
+    return  Marionette.CompositeView.extend({
         className: 'clearfix bracket',
+        template: Template,
+        itemViewContainer: '.viewport-content',
         itemView: RoundView,
         itemViewOptions: function () {
             return {
@@ -31,6 +33,27 @@ define([
         renderParticipants: function () {
             this.children.each(function (view) {
                 view.renderParticipants();
+            });
+        },
+
+        onRender: function () {
+            var maxMatches = this.collection.first().getMatches().length;
+            var totalHeight = maxMatches * (Config.heightMatch + Config.spacerHori) + Config.height + Config.spacerHori;
+            var w = this.collection.length * (Config.widthMatch + Config.spacerVerc) - Config.spacerVerc;
+
+            this.$(".viewport").width(w);
+            this.$(".viewport").height(totalHeight);
+        },
+
+        onDomRefresh: function () {
+            this.myScroll = new IScroll(this.$el[0], {
+                zoom: true,
+                zoomMax: 1,
+                zoomMin: 0.5,
+                scrollX: true,
+                scrollY: true,
+                mouseWheel: true,
+                wheelAction: 'zoom'
             });
         },
 
