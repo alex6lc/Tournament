@@ -5,6 +5,9 @@ require.config({
         },
         'jqueryui': {
             deps: ['jquery']
+        },
+        'iscroll': {
+            exports: 'window.IScroll'
         }
     },
     paths: {
@@ -18,7 +21,8 @@ require.config({
         'hbs': '../3rd/hbs/hbs',
         'handlebars': '../3rd/handlebars/handlebars',
         'localstorage': '../3rd/backbone.localStorage/backbone.localStorage',
-        'relational': '../3rd/backbone-relational/backbone-relational'
+        'relational': '../3rd/backbone-relational/backbone-relational',
+        'iscroll': '../3rd/iscroll/build/iscroll-zoom'
     },
     hbs: {
         disableI18n: true,
