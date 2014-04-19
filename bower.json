@@ -10,9 +10,10 @@
     "hbs": "0.8.0",
     "jquery": "2.1.0",
     "jquery-ui": "1.10.4",
-    "marionette": "1.7.4",
+    "marionette": "1.8.2",
     "requirejs": "2.1.11",
-    "semantic": "0.15.4",
-    "underscore": "1.6.0"
+    "semantic": "0.15.5",
+    "underscore": "1.6.0",
+    "iscroll": "5.1.1"
   }
 }
