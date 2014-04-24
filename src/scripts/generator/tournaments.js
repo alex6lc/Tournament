@@ -177,20 +177,35 @@ define([
                 return prevMatches[prevMatchIndex + 1];
             }
         },
-        isAvailable: function (homeOrAway) {
+        prevHasParticipant: function (homeOrAway) {
             var prev = this.getPrevMatch(homeOrAway);
+            if (prev === null) {
+                return false;
+            }
 
-            return !((prev && prev.hasParticipant()) || this.nextSpotHasParticipant());
+            if (prev.hasParticipant()) {
+                return true;
+            } else {
+                return prev.prevHasParticipant(homeOrAway);
+            }
         },
-        nextSpotHasParticipant: function () {
+        isAvailable: function (homeOrAway) {
+            return !this.prevHasParticipant(homeOrAway) && !this.nextHasParticipant();
+        },
+        nextHasParticipant: function () {
             var next = this.getNextMatch();
             if (next === null) {
                 return false;
             }
+
             var round = this.get("Round");
             var matchIndex = round.getMatchIndex(this);
             var goToHomeOrAway = (matchIndex % 2 === 0) ? "Home" : "Away";
-            return next.has(goToHomeOrAway);
+            if (next.has(goToHomeOrAway)) {
+                return true
+            } else {
+                return next.nextHasParticipant();
+            }
         }
     });
 

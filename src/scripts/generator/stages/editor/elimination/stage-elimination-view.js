@@ -103,6 +103,8 @@ define([
             this.bracketView.$(".js-selectable").sortable({
                 connectWith: ".js-selectable",
                 placeholder: "test-class",
+                appendTo: this.participantsView.$el,
+                helper: "clone",
                 receive: function (event, ui) {
                     var $list = $(this);
                     if (!$list.hasClass("valid")) {
