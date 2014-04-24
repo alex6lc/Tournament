@@ -202,7 +202,7 @@ define([
             var matchIndex = round.getMatchIndex(this);
             var goToHomeOrAway = (matchIndex % 2 === 0) ? "Home" : "Away";
             if (next.has(goToHomeOrAway)) {
-                return true
+                return true;
             } else {
                 return next.nextHasParticipant();
             }
