@@ -46,7 +46,7 @@ define([
         },
 
         onDomRefresh: function () {
-            this.myScroll = new IScroll(this.$el[0], {
+            /*this.myScroll = new IScroll(this.$el[0], {
                 zoom: true,
                 zoomMax: 1,
                 zoomMin: 0.5,
@@ -54,7 +54,7 @@ define([
                 scrollY: true,
                 mouseWheel: true,
                 wheelAction: 'zoom'
-            });
+            });*/
         },
 
         calculateBracketPos: function () {
