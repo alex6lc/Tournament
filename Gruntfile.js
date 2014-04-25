@@ -19,7 +19,7 @@ module.exports = function (grunt) {
         concat: {
             css: {
                 src: ['src/3rd/semantic/build/packaged/css/semantic.css', 'src/styles/*.css'],
-                dest: 'dist/styles/styles.css'
+                dest: 'dist/styles/main.css'
             }
         },
         cssmin: {
@@ -27,8 +27,8 @@ module.exports = function (grunt) {
                 keepSpecialComments: 0
             },
             minify: {
-                src: 'dist/styles/styles.css',
-                dest: 'dist/styles/styles.css'
+                src: 'dist/styles/main.css',
+                dest: 'dist/styles/main.css'
             }
         },
         copy: {
