@@ -3,7 +3,6 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-
         jshint: {
             files: ['Gruntfile.js', 'src/**/*.js'],
             options: {
@@ -14,15 +13,29 @@ module.exports = function (grunt) {
         clean: {
             dist: ['dist']
         },
+        usemin: {
+            html: 'dist/index.html'
+        },
+        concat: {
+            css: {
+                src: ['src/3rd/semantic/build/packaged/css/semantic.css', 'src/styles/*.css'],
+                dest: 'dist/styles/styles.css'
+            }
+        },
+        cssmin: {
+            options: {
+                keepSpecialComments: 0
+            },
+            minify: {
+                src: 'dist/styles/styles.css',
+                dest: 'dist/styles/styles.css'
+            }
+        },
         copy: {
             dist: {
                 files: [
-                    {
-                        expand: true,
-                        cwd: 'src',
-                        src: ['styles/**'],
-                        dest: 'dist/'
-                    }
+                    { expand: true, cwd: 'src/3rd/semantic/build/packaged/fonts/', src: ['**'], dest: 'dist/fonts' },
+                    { expand: true, cwd: 'src/3rd/semantic/build/packaged/images/', src: ['**'], dest: 'dist/images' }
                 ]
             }
         },
@@ -57,12 +70,15 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-usemin');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('build', ['clean', 'copy', 'requirejs', 'replace']);
+    grunt.registerTask('build', ['clean', 'copy', 'requirejs', 'concat', 'cssmin', 'replace', 'usemin']);
     grunt.registerTask('test', ['jshint']);
 };
