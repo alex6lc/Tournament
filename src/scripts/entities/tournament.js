@@ -8,7 +8,13 @@ define([
 ], function (Backbone, Participant, Participants, Stage, Stages) {
     'use strict';
 
-    return Backbone.RelationalModel.extend({
+    var statuses = {
+        INITIALIZED: 0,
+        STARTED: 10,
+        PAUSED: 20
+    };
+
+    var tournament = Backbone.RelationalModel.extend({
         idAttribute: "Id",
         relations: [
             {
@@ -31,7 +37,17 @@ define([
             Sponsors: "",
             Date: "",
             Participants: null,
-            Stages: null
+            Stages: null,
+            Status: statuses.INITIALIZED
+        },
+
+        start: function () {
+            this.set("Status", statuses.STARTED);
+            this.save();
         }
     });
+
+    tournament.statuses = statuses;
+
+    return tournament;
 });
