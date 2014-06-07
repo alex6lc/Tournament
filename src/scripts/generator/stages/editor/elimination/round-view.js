@@ -1,9 +1,10 @@
 define([
     'marionette',
+    'entities/matches',
     'generator/stages/editor/elimination/match-view',
     'tournaments/stages/elimination/bracket-config',
     'hbs!generator/stages/editor/elimination/round-tmp'
-], function (Marionette, MatchView, Config, RoundTemplate) {
+], function (Marionette, Matches, MatchView, Config, RoundTemplate) {
     'use strict';
 
     return Marionette.CompositeView.extend({
@@ -27,7 +28,7 @@ define([
         initialize: function (options) {
             this.bracketPos = options.bracketPos;
             this.participants = options.participants;
-            this.collection = this.model.getMatches();
+            this.collection = new Matches(this.model.getMatches());
         },
 
         bindParticipants: function () {

@@ -2,7 +2,7 @@ define([
     'marionette',
     'account/login-view',
     'account/signup-view',
-    'generator/tournaments',
+    'entities/tournaments',
     'tournaments/dashboard-view',
     'generator/tournament-view',
     'generator/participants-view',

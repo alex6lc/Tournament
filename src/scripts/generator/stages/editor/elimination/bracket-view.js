@@ -1,10 +1,11 @@
 define([
+    'underscore',
     'marionette',
     'iscroll',
     'tournaments/stages/elimination/bracket-config',
     'generator/stages/editor/elimination/round-view',
     'hbs!generator/stages/editor/elimination/bracket-tmp'
-], function (Marionette, IScroll, Config, RoundView, Template) {
+], function (_, Marionette, IScroll, Config, RoundView, Template) {
     'use strict';
 
     return  Marionette.CompositeView.extend({
@@ -61,7 +62,7 @@ define([
             var pos = [];
             this.collection.each(function (round, rIndex) {
                 var newPos = [];
-                round.getMatches().each(function (match, mIndex) {
+                _.each(round.getMatches(), function (match, mIndex) {
                     if (rIndex === 0) {
                         newPos.push(mIndex * (Config.heightMatch + Config.spacerHori) + Config.height + Config.spacerHori);
                     } else {
