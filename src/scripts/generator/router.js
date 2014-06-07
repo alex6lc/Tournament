@@ -1,68 +1,37 @@
 define([
     'marionette',
-    'account/login-view',
-    'account/signup-view',
-    'entities/tournaments',
-    'tournaments/dashboard-view',
     'generator/tournament-view',
     'generator/participants-view',
     'generator/stages/stages-view',
     'generator/stages/editor/stage-view',
-    'generator/stages/rounds/rounds-view',
-    'tournaments/stages/groups/groups-view'
+    'generator/stages/rounds/rounds-view'
 ], function (Marionette,
-             LoginView,
-             SignupView,
-             Tournaments,
-             DashboardView,
              TournamentView,
              ParticipantsView,
              StagesView,
              StageEditorView,
-             RoundsView,
-             GroupsView
+             RoundsView
 ) {
     'use strict';
 
     var app = null;
     var tournaments = null;
 
-    var Router = Marionette.AppRouter.extend({
+    return Marionette.AppRouter.extend({
         initialize: function (options) {
-            options = options || {};
             this.app = app = options.app;
-
-            this.tournaments = tournaments = new Tournaments();
-            this.tournaments.fetch();
+            this.tournaments = tournaments = options.tournaments;
         },
         appRoutes: {
-            "": "tournaments",
-            "login": "showLogin",
-            "signup": "showSignup",
             "generator/new": "showNewTournament",
             "generator/:tournamentId": "showTournament",
             "generator/:tournamentId/participants": "showParticipants",
             "generator/:tournamentId/stages": "showStages",
             "generator/:tournamentId/stages/new": "showNewStage",
             "generator/:tournamentId/stages/:stageId": "showEditStage",
-            "generator/:tournamentId/stages/:stageId/rounds": "showEditRounds",
-            "generator/:tournamentId/stages/:stageId/preview": "showStagePreview"
+            "generator/:tournamentId/stages/:stageId/rounds": "showEditRounds"
         },
         controller: {
-            tournaments: function () {
-                var view = new DashboardView({
-                    collection: tournaments
-                });
-                app.main.show(view);
-            },
-            showLogin: function () {
-                var view = new LoginView();
-                app.main.show(view);
-            },
-            showSignup: function () {
-                var view = new SignupView();
-                app.main.show(view);
-            },
             showNewTournament: function () {
                 //this is weird
                 var tournament = new tournaments.model();
@@ -124,21 +93,7 @@ define([
                     collection: rounds
                 });
                 app.main.show(view);
-            },
-            showStagePreview: function (tournamentId, stageId) {
-                var tournament = tournaments.get(tournamentId);
-                var stage = tournament.get("Stages").get(stageId);
-                var groups = stage.get("Groups");
-
-                var view = new GroupsView({
-                    model: tournament,
-                    collection: groups,
-                    stageModel: stage
-                });
-                app.main.show(view);
             }
         }
     });
-
-    return Router;
 });

@@ -1,14 +1,34 @@
-define(['jquery', 'underscore', 'marionette', 'backbone', 'router'], function ($, _, Marionette, Backbone, Router) {
+define([
+    'jquery',
+    'underscore',
+    'marionette',
+    'backbone',
+    'entities/tournaments',
+    'tournaments/router',
+    'generator/router'
+], function ($, _, Marionette, Backbone, Tournaments, TournamentsRouter, GeneratorRouter) {
     'use strict';
 
+    var tournaments = new Tournaments();
+    tournaments.fetch();
     var app = new Marionette.Application();
 
     app.addInitializer(function () {
-        var router = app.router = new Router({ app: app });
+        app.tournamentsRouter = new TournamentsRouter({
+            app: app,
+            tournaments: tournaments
+        });
+    });
+
+    app.addInitializer(function () {
+        var router = app.generatorRouter = new GeneratorRouter({
+            app: app,
+            tournaments: tournaments
+        });
 
         router.on("route", function (page, args) {
             if (args.length > 0 && _.isString(args[0])) {
-                var tournament = router.tournaments.get(args[0]);
+                var tournament = tournaments.get(args[0]);
 
                 var setDebugInfo = function () {
                     var json = tournament.toJSON();
@@ -35,7 +55,8 @@ define(['jquery', 'underscore', 'marionette', 'backbone', 'router'], function ($
 
                 if (href.slice(protocol.length) !== protocol) {
                     event.preventDefault();
-                    app.router.navigate(href, true);
+
+                    Backbone.history.navigate(href, true);
                 }
             });
         }
