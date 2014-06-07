@@ -3,11 +3,13 @@ define([
     'account/login-view',
     'account/signup-view',
     'tournaments/dashboard-view',
+    'tournaments/tournament-view',
     'tournaments/stages/groups/groups-view'
 ], function (Marionette,
              LoginView,
              SignupView,
              DashboardView,
+             TournamentView,
              GroupsView
 ) {
     'use strict';
@@ -21,16 +23,27 @@ define([
             this.tournaments = tournaments = options.tournaments;
         },
         appRoutes: {
-            "": "tournaments",
+            "": "showDashboard",
+            "t/:tournamentId": "showTournament",
+            "t/:tournamentId/s/:stageId": "showStage",
             "login": "showLogin",
             "signup": "showSignup"
         },
         controller: {
-            tournaments: function () {
+            showDashboard: function () {
                 var view = new DashboardView({
                     collection: tournaments
                 });
                 app.main.show(view);
+            },
+            showTournament: function (tournamentId) {
+                var view = new TournamentView({
+                    model: tournaments.get(tournamentId)
+                });
+                app.main.show(view);
+            },
+            showStage: function () {
+
             },
             showLogin: function () {
                 var view = new LoginView();
