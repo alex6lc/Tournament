@@ -1,11 +1,15 @@
 define([
     'marionette',
+    'entities/tournament',
+    'helpers/navigator',
     'account/login-view',
     'account/signup-view',
     'tournaments/dashboard-view',
     'tournaments/tournament-view',
     'tournaments/stages/groups/groups-view'
 ], function (Marionette,
+             Tournament,
+             Navigator,
              LoginView,
              SignupView,
              DashboardView,
@@ -37,8 +41,15 @@ define([
                 app.main.show(view);
             },
             showTournament: function (tournamentId) {
+                var model = tournaments.get(tournamentId);
+
+                if (model.get("Status") !== Tournament.statuses.STARTED) {
+                    Navigator(""); // Return to dashboard
+                    return;
+                }
+
                 var view = new TournamentView({
-                    model: tournaments.get(tournamentId)
+                    model: model
                 });
                 app.main.show(view);
             },

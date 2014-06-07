@@ -30,7 +30,8 @@ define([
         template: stagesTemplate,
 
         events: {
-            'click .js-new-stage': 'navigateNewStage'
+            'click .js-new-stage': 'navigateNewStage',
+            'click .js-start': 'startTournament'
         },
 
         itemView: ItemView,
@@ -53,6 +54,15 @@ define([
             event.stopPropagation();
 
             Navigator("/generator/"  + this.model.id + "/stages/new");
+        },
+
+        startTournament: function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            this.model.start();
+
+            Navigator("/t/"  + this.model.id);
         }
     });
 
