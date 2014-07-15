@@ -9,7 +9,7 @@ define([
 ], function (ui, _, Marionette, Utils, ParticipantsLabelView, GroupsView, template) {
     'use strict';
 
-    return Marionette.Layout.extend({
+    return Marionette.LayoutView.extend({
         template: template,
 
         regions: {

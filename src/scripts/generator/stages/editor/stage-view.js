@@ -10,7 +10,7 @@ define([
 ], function (_, Backbone, Marionette, Utils, Navigator, StageGroupView, StageEliminationView, template) {
     'use strict';
 
-    return Marionette.Layout.extend({
+    return Marionette.LayoutView.extend({
         template: template,
         events: {
             'submit form': 'saveForm',
@@ -31,7 +31,7 @@ define([
         },
 
         serializeData: function () {
-            var data = Marionette.Layout.prototype.serializeData.apply(this);
+            var data = Marionette.LayoutView.prototype.serializeData.apply(this);
             data.isGroup = this.model.get("Type") === 0;
             data.isElimination = this.model.get("Type") === 1;
             return data;

@@ -45,7 +45,7 @@ define([
         });
     });
 
-    app.on("initialize:after", function () {
+    app.on("start", function () {
         if (Backbone.history) {
             Backbone.history.start({ pushState: true });
 

@@ -3,19 +3,16 @@ require.config({
         'handlebars': {
             exports: 'Handlebars'
         },
-        'jqueryui': {
-            deps: ['jquery']
-        },
         'iscroll': {
             exports: 'window.IScroll'
         }
     },
     paths: {
         'jquery': '../3rd/jquery/dist/jquery',
-        'jqueryui': '../3rd/jquery-ui/ui/jquery-ui',
+        'jqueryui': '../3rd/jquery-ui/jquery-ui',
         'underscore': '../3rd/underscore/underscore',
         'backbone': '../3rd/backbone/backbone',
-        'marionette': '../3rd/marionette/lib/core/amd/backbone.marionette',
+        'marionette': '../3rd/marionette/lib/core/backbone.marionette',
         'backbone.wreqr': '../3rd/backbone.wreqr/lib/backbone.wreqr',
         'backbone.babysitter': '../3rd/backbone.babysitter/lib/backbone.babysitter',
         'hbs': '../3rd/hbs/hbs',

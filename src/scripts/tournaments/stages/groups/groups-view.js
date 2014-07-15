@@ -20,15 +20,15 @@ define([
     });
 
     var Round = Marionette.CompositeView.extend({
-        itemView: Match,
-        itemViewContainer: ".js-matches",
+        childView: Match,
+        childViewContainer: ".js-matches",
         template: Handlebars.compile('<div>{{Title}}</div><div class="js-matches"></div>')
 
     });
 
     var Rounds = Marionette.CollectionView.extend({
-        itemView: Round,
-        itemViewOptions: function (model) {
+        childView: Round,
+        childViewOptions: function (model) {
             var allMatches = this.stageModel.get("Matches").clone();
             var matches = allMatches.where({ Group: this.groupModel, Round: model });
 
@@ -44,7 +44,7 @@ define([
         }
     });
 
-    var Group = Marionette.Layout.extend({
+    var Group = Marionette.LayoutView.extend({
         template: Handlebars.compile('<div>{{Title}}</div><div><div class="js-standing"></div><div class="js-rounds"></div></div>'),
         regions: {
             standing: ".js-standing",
@@ -66,8 +66,8 @@ define([
     });
 
     var Groups = Marionette.CollectionView.extend({
-        itemView: Group,
-        itemViewOptions: function () {
+        childView: Group,
+        childViewOptions: function () {
             return {
                 stageModel: this.stageModel
             };

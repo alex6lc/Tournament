@@ -10,8 +10,8 @@ define([
         className: 'group-editor',
         template: Handlebars.compile('<div>{{Title}}<a href="#" class="js-delete">X</a></div><ul class="js-selectable"></ul>'),
 
-        itemView: ParticipantLabelView,
-        itemViewContainer: "ul",
+        childView: ParticipantLabelView,
+        childViewContainer: "ul",
 
         triggers: {
             "click .js-delete": "group:removed"

@@ -20,8 +20,8 @@ define([
             'submit form': 'saveForm'
         },
 
-        itemView: ItemView,
-        itemViewContainer: ".js-rounds-list",
+        childView: ItemView,
+        childViewContainer: ".js-rounds-list",
 
 
         initialize: function (options) {

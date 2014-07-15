@@ -34,16 +34,16 @@ define([
             'click .js-start': 'startTournament'
         },
 
-        itemView: ItemView,
-        itemViewContainer: ".js-stages-list",
-        itemViewOptions: function () {
+        childView: ItemView,
+        childViewContainer: ".js-stages-list",
+        childViewOptions: function () {
             return {
                 tournament: this.model
             };
         },
 
         initialize: function () {
-            this.listenTo(this, "itemview:deleteStage", function (view) {
+            this.listenTo(this, "childview:deleteStage", function (view) {
                 this.collection.remove(view.model);
                 this.model.save();
             }, this);

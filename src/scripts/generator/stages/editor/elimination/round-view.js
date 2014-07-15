@@ -10,9 +10,9 @@ define([
     return Marionette.CompositeView.extend({
         template: RoundTemplate,
 
-        itemView: MatchView,
-        itemViewContainer: ".js-matches",
-        itemViewOptions: function () {
+        childView: MatchView,
+        childViewContainer: ".js-matches",
+        childViewOptions: function () {
             return {
                 bracketPos: this.bracketPos,
                 participants: this.participants

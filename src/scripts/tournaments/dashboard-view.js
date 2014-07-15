@@ -28,8 +28,8 @@ define([
     });
 
     var CompositeView = Marionette.CompositeView.extend({
-        itemView: ItemView,
-        itemViewContainer: ".js-list",
+        childView: ItemView,
+        childViewContainer: ".js-list",
 
         template: dashboardTemplate,
 

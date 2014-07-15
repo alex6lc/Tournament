@@ -7,7 +7,7 @@ define([
 ], function ($, Marionette, ParticipantLabelView, conf, MatchTemplate) {
     'use strict';
 
-    return Marionette.Layout.extend({
+    return Marionette.LayoutView.extend({
         className: 'team-bracket',
         tagName: 'table',
 

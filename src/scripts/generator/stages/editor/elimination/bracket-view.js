@@ -11,9 +11,9 @@ define([
     return  Marionette.CompositeView.extend({
         className: 'clearfix bracket',
         template: Template,
-        itemViewContainer: '.viewport-content',
-        itemView: RoundView,
-        itemViewOptions: function () {
+        childViewContainer: '.viewport-content',
+        childView: RoundView,
+        childViewOptions: function () {
             return {
                 bracketPos: this.bracketPos,
                 participants: this.participants

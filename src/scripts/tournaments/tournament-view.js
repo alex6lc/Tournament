@@ -27,9 +27,9 @@ define([
     var CompositeView = Marionette.CompositeView.extend({
         template: tournamentTemplate,
 
-        itemView: ItemView,
-        itemViewContainer: ".js-list",
-        itemViewOptions: function () {
+        childView: ItemView,
+        childViewContainer: ".js-list",
+        childViewOptions: function () {
             return {
                 tournament: this.model
             };

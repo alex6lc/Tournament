@@ -8,8 +8,8 @@ define([
 
     return  Marionette.CompositeView.extend({
         className: 'clearfix',
-        itemView: GroupView,
-        itemViewContainer: '.js-groups-list',
+        childView: GroupView,
+        childViewContainer: '.js-groups-list',
 
         template: Handlebars.compile('<div class="js-groups-list"></div><div class="group-editor js-add-group">Add</div>'),
         events: {
@@ -17,7 +17,7 @@ define([
         },
 
         initialize: function () {
-            this.listenTo(this, "itemview:group:removed", this.removeGroup, this);
+            this.listenTo(this, "childview:group:removed", this.removeGroup, this);
         },
 
         removeGroup: function (view) {

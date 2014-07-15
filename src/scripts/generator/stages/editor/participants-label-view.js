@@ -5,7 +5,7 @@ define([
     'use strict';
 
     return Marionette.CollectionView.extend({
-        itemView: ParticipantLabelView,
+        childView: ParticipantLabelView,
         tagName: 'ul',
         className: 'participant-label-list js-selectable'
     });
