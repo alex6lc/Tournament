@@ -102,7 +102,7 @@ define([
         },
         initialize: function (options) {
             this.tournament = options.tournament;
-            this.collection = this.model.get("Groups")
+            this.collection = this.model.get("Groups");
         }
     });
 

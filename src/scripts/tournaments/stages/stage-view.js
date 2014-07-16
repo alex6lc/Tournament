@@ -28,7 +28,7 @@ define([
             if (type === 0) {
                 View = StageGroupView;
             } else {
-                View = StageEliminationView;
+                //View = StageEliminationView;
             }
 
             return new View({
