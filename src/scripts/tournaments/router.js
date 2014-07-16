@@ -2,19 +2,15 @@ define([
     'marionette',
     'entities/tournament',
     'helpers/navigator',
-    'account/login-view',
-    'account/signup-view',
     'tournaments/dashboard-view',
     'tournaments/tournament-view',
-    'tournaments/stages/groups/groups-view'
+    'tournaments/stages/stage-view',
 ], function (Marionette,
              Tournament,
              Navigator,
-             LoginView,
-             SignupView,
              DashboardView,
              TournamentView,
-             GroupsView
+             StageView,
 ) {
     'use strict';
 
@@ -30,8 +26,6 @@ define([
             "": "showDashboard",
             "t/:tournamentId": "showTournament",
             "t/:tournamentId/s/:stageId": "showStage",
-            "login": "showLogin",
-            "signup": "showSignup"
         },
         controller: {
             showDashboard: function () {
@@ -42,26 +36,18 @@ define([
             },
             showTournament: function (tournamentId) {
                 var model = tournaments.get(tournamentId);
-
-                if (model.get("Status") !== Tournament.statuses.STARTED) {
-                    Navigator(""); // Return to dashboard
-                    return;
-                }
-
                 var view = new TournamentView({
                     model: model
                 });
                 app.main.show(view);
             },
-            showStage: function () {
+            showStage: function (tournamentId, stageId) {
+                var tournament = tournaments.get(tournamentId);
 
-            },
-            showLogin: function () {
-                var view = new LoginView();
-                app.main.show(view);
-            },
-            showSignup: function () {
-                var view = new SignupView();
+                var view = new StageView({
+                    model: tournament.get("Stages").get(stageId),
+                    tournament: tournament
+                });
                 app.main.show(view);
             },
             showStagePreview: function (tournamentId, stageId) {

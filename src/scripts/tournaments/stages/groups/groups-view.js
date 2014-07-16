@@ -2,12 +2,26 @@ define([
     'marionette',
     'backbone',
     'handlebars',
-    'helpers/utils'
-], function (Marionette, Backbone, Handlebars, Utils) {
+    'helpers/navigator'
+], function (Marionette, Backbone, Handlebars, Navigator) {
     'use strict';
 
     var Match = Marionette.ItemView.extend({
-        template: Handlebars.compile("<div>{{HomeName}} vs {{AwayName}}</div>"),
+        template: Handlebars.compile("<div>{{HomeName}} vs {{AwayName}} <a href='#' class='js-edit'>Edit</a></div>"),
+        events: {
+            "click .js-edit": "editMatch"
+        },
+
+        initialize: function (options) {
+            this.tournament = options.tournament;
+        },
+
+        editMatch: function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            Navigator("t/" + this.tournament.id + "/m/" + this.model.id);
+        },
         serializeData: function () {
             return {
                 HomeName: this.model.get("Home").get("Name"),
@@ -22,25 +36,36 @@ define([
     var Round = Marionette.CompositeView.extend({
         childView: Match,
         childViewContainer: ".js-matches",
-        template: Handlebars.compile('<div>{{Title}}</div><div class="js-matches"></div>')
+        template: Handlebars.compile('<div>{{Title}}</div><div class="js-matches"></div>'),
+        childViewOptions: function () {
+            return {
+                tournament: this.tournament
+            };
+        },
+
+        initialize: function (options) {
+            this.tournament = options.tournament;
+        }
 
     });
 
     var Rounds = Marionette.CollectionView.extend({
         childView: Round,
         childViewOptions: function (model) {
-            var allMatches = this.stageModel.get("Matches").clone();
-            var matches = allMatches.where({ Group: this.groupModel, Round: model });
+            var allMatches = this.stage.get("Matches").clone();
+            var matches = allMatches.where({ Group: this.group, Round: model });
 
             return {
                 collection: new Backbone.Collection(matches),
-                model: model
+                model: model,
+                tournament: this.tournament
             };
         },
 
         initialize: function (options) {
-            this.groupModel = options.groupModel;
-            this.stageModel = options.stageModel;
+            this.group = options.group;
+            this.stage = options.stage;
+            this.tournament = options.tournament;
         }
     });
 
@@ -51,14 +76,16 @@ define([
             rounds: ".js-rounds"
         },
         initialize: function (options) {
-            this.stageModel = options.stageModel;
+            this.tournament = options.tournament;
+            this.stage = options.stage;
         },
 
         onRender: function () {
             var roundsView = new Rounds({
-                groupModel: this.model,
-                stageModel: this.stageModel,
-                collection: this.stageModel.get("Rounds")
+                group: this.model,
+                stage: this.stage,
+                tournament: this.tournament,
+                collection: this.stage.get("Rounds")
             });
 
             this.rounds.show(roundsView);
@@ -69,11 +96,13 @@ define([
         childView: Group,
         childViewOptions: function () {
             return {
-                stageModel: this.stageModel
+                stage: this.model,
+                tournament: this.tournament
             };
         },
         initialize: function (options) {
-            this.stageModel = options.stageModel;
+            this.tournament = options.tournament;
+            this.collection = this.model.get("Groups")
         }
     });
 
