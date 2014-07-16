@@ -11,7 +11,14 @@ define([
         template: itemTemplate,
         events: {
             "click .js-edit": "editTournament",
-            "click .js-delete": "deleteTournament"
+            "click .js-delete": "deleteTournament",
+            "click .js-view": "viewTournament"
+        },
+        viewTournament: function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            Navigator("t/" + this.model.id);
         },
         editTournament: function (event) {
             event.preventDefault();
