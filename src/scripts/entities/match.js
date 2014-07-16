@@ -7,7 +7,13 @@ define([
 ], function (Backbone, Round, Group, Participant) {
     'use strict';
 
-    return Backbone.RelationalModel.extend({
+    var status = {
+        WIN: 2,
+        LOSS: 1,
+        DRAW: 0
+    };
+
+    var Match = Backbone.RelationalModel.extend({
         idAttribute: "Id",
         relations: [{
             type: 'HasOne',
@@ -96,4 +102,8 @@ define([
             }
         }
     });
+
+    Match.status = status;
+
+    return Match;
 });

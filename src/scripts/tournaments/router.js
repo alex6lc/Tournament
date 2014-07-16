@@ -5,12 +5,14 @@ define([
     'tournaments/dashboard-view',
     'tournaments/tournament-view',
     'tournaments/stages/stage-view',
+    'generator/matches/match-editor-view'
 ], function (Marionette,
              Tournament,
              Navigator,
              DashboardView,
              TournamentView,
              StageView,
+             MatchEditorView
 ) {
     'use strict';
 
@@ -26,6 +28,7 @@ define([
             "": "showDashboard",
             "t/:tournamentId": "showTournament",
             "t/:tournamentId/s/:stageId": "showStage",
+            "t/:tournamentId/m/:matchId": "showMatch"
         },
         controller: {
             showDashboard: function () {
@@ -50,15 +53,12 @@ define([
                 });
                 app.main.show(view);
             },
-            showStagePreview: function (tournamentId, stageId) {
+            showMatch: function (tournamentId, matchId) {
                 var tournament = tournaments.get(tournamentId);
-                var stage = tournament.get("Stages").get(stageId);
-                var groups = stage.get("Groups");
 
-                var view = new GroupsView({
-                    model: tournament,
-                    collection: groups,
-                    stageModel: stage
+                var view = new MatchEditorView({
+                    model: tournament.get("Stages").findMatch(matchId),
+                    tournament: tournament
                 });
                 app.main.show(view);
             }

@@ -1,0 +1,28 @@
+<form action="#" method="post">
+    <div>{{ HomeName }}</div>
+    <input type="text" name="HomeScore" value="{{ HomeScore }}" />
+
+    <label for="home-r-win">Win</label>
+    <input id="home-r-win" type="radio" name="HomeStatus" value="win" {{#if HasHomeWin}}checked{{/if}}>
+
+    <label for="home-r-draw">Draw</label>
+    <input id="home-r-draw" type="radio" name="HomeStatus" value="draw" {{#if HasHomeDraw}}checked{{/if}}>
+
+    <label for="home-r-loss">Loss</label>
+    <input id="home-r-loss" type="radio" name="HomeStatus" value="loss" {{#if HasHomeLoss}}checked{{/if}}>
+
+
+    <div>{{ AwayName }}</div>
+    <input type="text" name="AwayScore" value="{{ AwayScore }}" />
+
+    <label for="away-r-win">Win</label>
+    <input id="away-r-win" type="radio" name="AwayStatus" value="win" {{#if HasAwayWin}}checked{{/if}}>
+
+    <label for="away-r-draw">Draw</label>
+    <input id="away-r-draw" type="radio" name="AwayStatus" value="draw" {{#if HasAwayDraw}}checked{{/if}}>
+
+    <label for="away-r-loss">Loss</label>
+    <input id="away-r-loss" type="radio" name="AwayStatus" value="loss" {{#if HasAwayLoss}}checked{{/if}}>
+
+    <input type="submit" value="Next">
+</form>
