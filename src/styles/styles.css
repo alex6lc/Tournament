@@ -11,40 +11,6 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-#t .container {
-    width: auto;
-    margin-right: 150px;
-    margin-left: 300px;
-}
-
-#t .side-menu {
-    position: absolute;
-    margin: 0;
-    top: 4.5rem;
-    left: 0;
-    width: 275px;
-    border-radius: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-    -ms-overflow-y: auto;
-    overflow-y: auto;
-}
-
-#t .side-menu .item > i.icon {
-    float: none;
-    margin: 0 .83em 0 0;
-}
-
-#t .top-menu {
-    border-radius: 0 !important;
-}
-
-#t .top-menu .item {
-    padding: 1.75em .95em;
-}
-
 #debug {
     position: absolute;
     right: 0;
@@ -75,6 +41,14 @@ body {
     content: "";
     display: table;
     clear: both;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
 }
 
 .group-editor {
