@@ -8,6 +8,7 @@ require.config({
         }
     },
     paths: {
+        'moment': '../3rd/moment/moment',
         'jquery': '../3rd/jquery/dist/jquery',
         'jqueryui': '../3rd/jquery-ui/jquery-ui',
         'underscore': '../3rd/underscore/underscore',
