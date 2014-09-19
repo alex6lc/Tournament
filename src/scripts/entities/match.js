@@ -1,10 +1,11 @@
 define([
     'backbone',
+    'moment',
     './round',
     './group',
     './participant',
     'relational'
-], function (Backbone, Round, Group, Participant) {
+], function (Backbone, Moment, Round, Group, Participant) {
     'use strict';
 
     var status = {
@@ -15,6 +16,10 @@ define([
 
     var Match = Backbone.RelationalModel.extend({
         idAttribute: "Id",
+        defaults: {
+            ScheduleAt: Moment.utc(),
+            Location: ""
+        },
         relations: [{
             type: 'HasOne',
             key: 'Round',
