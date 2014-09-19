@@ -2,9 +2,10 @@ define([
     'marionette',
     'helpers/utils',
     'helpers/navigator',
+    'participants/next-match-view',
     'hbs!tournaments/dashboard-tmp',
     'hbs!tournaments/tournament-item-tmp'
-], function (Marionette, Utils, Navigator, dashboardTemplate, itemTemplate) {
+], function (Marionette, Utils, Navigator, NextMatchView, dashboardTemplate, itemTemplate) {
     'use strict';
 
     var ItemView = Marionette.ItemView.extend({
@@ -34,11 +35,17 @@ define([
         }
     });
 
-    var CompositeView = Marionette.CompositeView.extend({
-        childView: ItemView,
-        childViewContainer: ".js-list",
+    var TournamentList = Marionette.CollectionView.extend({
+        childView: ItemView
+    });
 
+    var Layout = Marionette.LayoutView.extend({
         template: dashboardTemplate,
+
+        regions: {
+            list: ".js-list",
+            nextMatch: ".js-next-match"
+        },
 
         events: {
             "click .js-clear": "clear",
@@ -53,13 +60,29 @@ define([
                 model.destroy();
             });
         },
+
         addTournament: function (event) {
             event.preventDefault();
             event.stopPropagation();
 
             Navigator("generator/new");
+        },
+
+        initTournamentList: function () {
+            return new TournamentList({
+                collection: this.collection
+            });
+        },
+
+        onShow: function () {
+            this.regions.list.show(this.initTournamentList());
+
+            this.regions.list.show(new NextMatchView({
+                model: null
+            }));
         }
+
     });
 
-    return CompositeView;
+    return Layout;
 });
