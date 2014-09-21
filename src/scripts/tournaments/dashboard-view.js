@@ -75,11 +75,9 @@ define([
         },
 
         onShow: function () {
-            this.regions.list.show(this.initTournamentList());
+            this.list.show(this.initTournamentList());
 
-            this.regions.list.show(new NextMatchView({
-                model: null
-            }));
+            this.nextMatch.show(new NextMatchView());
         }
 
     });
