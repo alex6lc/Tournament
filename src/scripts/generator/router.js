@@ -1,7 +1,7 @@
 define([
     'marionette',
     'generator/tournament-view',
-    'generator/participants-view',
+    'generator/participants/participants-view',
     'generator/stages/stages-view',
     'generator/stages/editor/stage-view',
     'generator/stages/rounds/rounds-view'
@@ -52,7 +52,8 @@ define([
             showParticipants: function (tournamentId) {
                 var tournament = tournaments.get(tournamentId);
                 var view = new ParticipantsView({
-                    model: tournament
+                    model: tournament,
+                    collection: tournament.get("Participants")
                 });
                 app.main.show(view);
             },
