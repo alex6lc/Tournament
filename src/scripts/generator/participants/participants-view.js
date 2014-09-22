@@ -1,4 +1,5 @@
 define([
+    'underscore',
     'backbone',
     'marionette',
     'entities/participant',
@@ -6,7 +7,7 @@ define([
     'helpers/navigator',
     './participant-editor-view',
     'hbs!generator/participants/participants-tmp'
-], function (Backbone, Marionette, Participant, Utils, Navigator, ItemView, template) {
+], function (_, Backbone, Marionette, Participant, Utils, Navigator, ItemView, template) {
     'use strict';
 
     return Marionette.CompositeView.extend({
