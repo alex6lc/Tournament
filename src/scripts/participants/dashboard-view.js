@@ -13,28 +13,20 @@
 
 define([
     'marionette',
-    'helpers/utils',
-    'helpers/navigator',
-    'hbs!tournaments/dashboard-tmp',
-    'hbs!tournaments/tournament-item-tmp'
-], function (Marionette, Utils, Navigator, dashboardTemplate, itemTemplate) {
+    './next-match-view',
+    'hbs!participants/dashboard-tmp'
+], function (Marionette, NextMatchView, dashboardTemplate) {
     'use strict';
 
-    return Marionette.ItemView.extend({
-        template: itemTemplate,
-        clear: function (event) {
-            event.preventDefault();
-            event.stopPropagation();
+    return Marionette.LayoutView.extend({
+        template: dashboardTemplate,
 
-            this.collection.each(function (model) {
-                model.destroy();
-            });
+        regions: {
+            nextMatch: ".js-next-match"
         },
-        addTournament: function (event) {
-            event.preventDefault();
-            event.stopPropagation();
 
-            Navigator("generator/new");
+        onShow: function () {
+            this.nextMatch.show(new NextMatchView());
         }
     });
 });

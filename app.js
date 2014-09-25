@@ -92,6 +92,7 @@ app.use(express.errorHandler());
  */
 
 app.get('/', homeController.index);
+app.get('/p', homeController.index);
 app.get('/t/:tournamentId', homeController.index);
 app.get('/t/:tournamentId/s/:stageId', homeController.index);
 app.get('/t/:tournamentId/m/:matchId', homeController.index);

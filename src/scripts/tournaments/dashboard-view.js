@@ -2,10 +2,9 @@ define([
     'marionette',
     'helpers/utils',
     'helpers/navigator',
-    'participants/next-match-view',
     'hbs!tournaments/dashboard-tmp',
     'hbs!tournaments/tournament-item-tmp'
-], function (Marionette, Utils, Navigator, NextMatchView, dashboardTemplate, itemTemplate) {
+], function (Marionette, Utils, Navigator, dashboardTemplate, itemTemplate) {
     'use strict';
 
     var ItemView = Marionette.ItemView.extend({
@@ -43,8 +42,7 @@ define([
         template: dashboardTemplate,
 
         regions: {
-            list: ".js-list",
-            nextMatch: ".js-next-match"
+            list: ".js-list"
         },
 
         events: {
@@ -76,8 +74,6 @@ define([
 
         onShow: function () {
             this.list.show(this.initTournamentList());
-
-            this.nextMatch.show(new NextMatchView());
         }
 
     });

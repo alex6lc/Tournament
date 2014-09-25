@@ -5,8 +5,9 @@ define([
     'backbone',
     'entities/tournaments',
     'tournaments/router',
-    'generator/router'
-], function ($, _, Marionette, Backbone, Tournaments, TournamentsRouter, GeneratorRouter) {
+    'generator/router',
+    'participants/router'
+], function ($, _, Marionette, Backbone, Tournaments, TournamentsRouter, GeneratorRouter, ParticipantsRouter) {
     'use strict';
 
     var tournaments = new Tournaments();
@@ -14,7 +15,14 @@ define([
     var app = new Marionette.Application();
 
     app.addInitializer(function () {
-        app.tournamentsRouter = new TournamentsRouter({
+        app.tournamentsRouter = new ParticipantsRouter({
+            app: app,
+            tournaments: tournaments
+        });
+    });
+
+    app.addInitializer(function () {
+        app.participantsRouter = new TournamentsRouter({
             app: app,
             tournaments: tournaments
         });
