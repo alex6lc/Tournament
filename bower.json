@@ -16,7 +16,9 @@
     "underscore": "1.7.0",
     "iscroll": "5.1.2",
     "foundation": "5.3.1",
-    "moment": "~2.8.3"
+    "moment": "~2.8.3",
+    "backfire": "~0.3.0",
+    "firebase": "~1.0.24"
   },
   "resolutions": {
     "backbone": "1.1.2",

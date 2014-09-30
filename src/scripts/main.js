@@ -5,6 +5,13 @@ require.config({
         },
         'iscroll': {
             exports: 'window.IScroll'
+        },
+        'backfire': {
+            deps: ['backbone', 'firebase'],
+            exports: 'Backbone.Firebase'
+        },
+        'firebase': {
+            exports: 'Firebase'
         }
     },
     paths: {
@@ -20,7 +27,9 @@ require.config({
         'handlebars': '../3rd/handlebars/handlebars',
         'localstorage': '../3rd/backbone.localStorage/backbone.localStorage',
         'relational': '../3rd/backbone-relational/backbone-relational',
-        'iscroll': '../3rd/iscroll/build/iscroll-zoom'
+        'iscroll': '../3rd/iscroll/build/iscroll-zoom',
+        'firebase': '../3rd/firebase/firebase',
+        'backfire': '../3rd/backfire/backbone-firebase'
     },
     hbs: {
         disableI18n: true,
