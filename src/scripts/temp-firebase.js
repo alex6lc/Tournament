@@ -70,6 +70,7 @@
         create: function(model, cb) {
             if (!model.id) {
                 model.id = this._fbref.ref().push().name();
+                model.set(model.idAttribute, model.id);
             }
 
             var val = model.toJSON();
