@@ -11,7 +11,7 @@ define([
     'use strict';
 
     var tournaments = new Tournaments();
-    tournaments.fetch();
+
     var app = new Marionette.Application();
 
     app.addInitializer(function () {
@@ -55,16 +55,26 @@ define([
 
     app.on("start", function () {
         if (Backbone.history) {
-            Backbone.history.start({ pushState: true });
+            /*
+            This is the main application entry point
+            Currently, we fetch everything (tournaments) which is kind a stupid.
+            */
 
-            $(document).on('click', 'a:not([data-bypass])', function (event) {
-                var href = $(this).attr('href');
-                var protocol = this.protocol + '//';
+            // TODO: Alexis (30/09/14): On demand fetch
+            tournaments.fetch({
+                success: function () {
+                    Backbone.history.start({ pushState: true });
 
-                if (href.slice(protocol.length) !== protocol) {
-                    event.preventDefault();
+                    $(document).on('click', 'a:not([data-bypass])', function (event) {
+                        var href = $(this).attr('href');
+                        var protocol = this.protocol + '//';
 
-                    Backbone.history.navigate(href, true);
+                        if (href.slice(protocol.length) !== protocol) {
+                            event.preventDefault();
+
+                            Backbone.history.navigate(href, true);
+                        }
+                    });
                 }
             });
         }
