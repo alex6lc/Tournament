@@ -7,7 +7,7 @@ module.exports = function (grunt) {
             files: ['Gruntfile.js', 'src/**/*.js'],
             options: {
                 jshintrc: '.jshintrc',
-                ignores: ['src/3rd/**/*.js']
+                ignores: ['src/3rd/**/*.js', 'src/scripts/temp-firebase.js']
             }
         },
         clean: {

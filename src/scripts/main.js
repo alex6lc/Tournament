@@ -29,7 +29,7 @@ require.config({
         'relational': '../3rd/backbone-relational/backbone-relational',
         'iscroll': '../3rd/iscroll/build/iscroll-zoom',
         'firebase': '../3rd/firebase/firebase',
-        'backfire': '../3rd/backfire/backbone-firebase'
+        'backfire': 'temp-firebase'
     },
     hbs: {
         disableI18n: true,
