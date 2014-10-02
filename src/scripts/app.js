@@ -55,7 +55,6 @@ define([
 
     app.on("start", function () {
         if (Backbone.history) {
-            Backbone.history.start({ pushState: true });
 
             $(document).on('click', 'a:not([data-bypass])', function (event) {
                 var href = $(this).attr('href');
@@ -70,12 +69,15 @@ define([
 
             setTimeout(function () {
                 /*
-                 This is the main application entry point
+                 Main application entry point
                  Currently, we fetch everything (tournaments) which is kind a stupid.
                  */
                 //TODO: Alexis (30/09/14): On demand fetch
                 //TODO: Alexis (1/10/14): Second hack, delay execution in order to ensure the fetch is called.
-                tournaments.fetch();
+                tournaments.fetch().done(function () {
+                    // More delay
+                    Backbone.history.start({ pushState: true });
+                });
             }, 1000);
         }
     });
