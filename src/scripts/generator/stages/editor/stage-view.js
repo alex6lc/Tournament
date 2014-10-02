@@ -6,8 +6,9 @@ define([
     'helpers/navigator',
     'generator/stages/editor/group/stage-group-view',
     'generator/stages/editor/elimination/stage-elimination-view',
+    'generator/stages/editor/elimination/double-stage-elimination-view',
     'hbs!generator/stages/editor/stage-tmp'
-], function (_, Backbone, Marionette, Utils, Navigator, StageGroupView, StageEliminationView, template) {
+], function (_, Backbone, Marionette, Utils, Navigator, StageGroupView, StageEliminationView, DoubleStageEliminationView, template) {
     'use strict';
 
     return Marionette.LayoutView.extend({
@@ -34,6 +35,7 @@ define([
             var data = Marionette.LayoutView.prototype.serializeData.apply(this);
             data.isGroup = this.model.get("Type") === 0;
             data.isElimination = this.model.get("Type") === 1;
+            data.isDoubleElimination = this.model.get("Type") === 2;
             return data;
         },
 
@@ -46,8 +48,10 @@ define([
             var View = null;
             if (type === 0) {
                 View = StageGroupView;
-            } else {
+            } else if (type === 1) {
                 View = StageEliminationView;
+            } else {
+                View = DoubleStageEliminationView;
             }
 
             return new View({
