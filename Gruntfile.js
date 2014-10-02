@@ -10,6 +10,14 @@ module.exports = function (grunt) {
                 ignores: ['src/3rd/**/*.js', 'src/scripts/temp-firebase.js']
             }
         },
+        connect: {
+            server: {
+                options: {
+                    port: 9001,
+                    base: 'dist'
+                }
+            }
+        },
         clean: {
             dist: ['dist']
         },
@@ -78,6 +86,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
     grunt.registerTask('build', ['clean', 'copy', 'requirejs', 'concat', 'cssmin', 'replace', 'usemin']);
     grunt.registerTask('test', ['jshint']);
