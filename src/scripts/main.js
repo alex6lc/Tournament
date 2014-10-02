@@ -6,10 +6,6 @@ require.config({
         'iscroll': {
             exports: 'window.IScroll'
         },
-        'backfire': {
-            deps: ['backbone', 'firebase'],
-            exports: 'Backbone.Firebase'
-        },
         'firebase': {
             exports: 'Firebase'
         }
@@ -28,7 +24,7 @@ require.config({
         'localstorage': '../3rd/backbone.localStorage/backbone.localStorage',
         'relational': '../3rd/backbone-relational/backbone-relational',
         'iscroll': '../3rd/iscroll/build/iscroll-zoom',
-        'firebase': '../3rd/firebase/firebase',
+        'firebase': '../3rd/firebase/firebase-debug',
         'backfire': 'temp-firebase'
     },
     hbs: {

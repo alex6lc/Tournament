@@ -1,3 +1,4 @@
+define(['backbone', 'firebase'], function () {
 /*!
  * BackFire is the officially supported Backbone binding for Firebase. The
  * bindings let you use special model and collection types that will
@@ -541,3 +542,5 @@
     });
 
 })();
+
+});
