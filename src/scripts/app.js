@@ -55,28 +55,28 @@ define([
 
     app.on("start", function () {
         if (Backbone.history) {
-            /*
-            This is the main application entry point
-            Currently, we fetch everything (tournaments) which is kind a stupid.
-            */
+            Backbone.history.start({ pushState: true });
 
-            // TODO: Alexis (30/09/14): On demand fetch
-            tournaments.fetch({
-                success: function () {
-                    Backbone.history.start({ pushState: true });
+            $(document).on('click', 'a:not([data-bypass])', function (event) {
+                var href = $(this).attr('href');
+                var protocol = this.protocol + '//';
 
-                    $(document).on('click', 'a:not([data-bypass])', function (event) {
-                        var href = $(this).attr('href');
-                        var protocol = this.protocol + '//';
+                if (href.slice(protocol.length) !== protocol) {
+                    event.preventDefault();
 
-                        if (href.slice(protocol.length) !== protocol) {
-                            event.preventDefault();
-
-                            Backbone.history.navigate(href, true);
-                        }
-                    });
+                    Backbone.history.navigate(href, true);
                 }
             });
+
+            setTimeout(function () {
+                /*
+                 This is the main application entry point
+                 Currently, we fetch everything (tournaments) which is kind a stupid.
+                 */
+                //TODO: Alexis (30/09/14): On demand fetch
+                //TODO: Alexis (1/10/14): Second hack, delay execution in order to ensure the fetch is called.
+                tournaments.fetch();
+            }, 1000);
         }
     });
 
