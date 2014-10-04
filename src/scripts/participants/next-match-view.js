@@ -30,7 +30,7 @@ define([
                     Id: "ID2",
                     Home: "YOU"
                 },
-                ScheduleAt: Moment.utc().days(7)
+                ScheduleAt: Moment.utc().add('hours', 7).unix()
             });
 
 
@@ -52,7 +52,7 @@ define([
         },
 
         getFormattedTimeDifference: function () {
-            var matchScheduleAt = this.model.get("ScheduleAt");
+            var matchScheduleAt = Moment.unix(this.model.get("ScheduleAt"));
             var milliseconds = matchScheduleAt.diff(Moment.utc());
 
             var duration = Moment.duration(milliseconds);

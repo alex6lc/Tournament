@@ -17,7 +17,7 @@ define([
     var Match = Backbone.RelationalModel.extend({
         idAttribute: "Id",
         defaults: {
-            ScheduleAt: Moment.utc(),
+            ScheduleAt: Moment.utc().unix(),
             Location: ""
         },
         relations: [{
