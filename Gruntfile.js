@@ -14,7 +14,8 @@ module.exports = function (grunt) {
             server: {
                 options: {
                     port: 9001,
-                    base: 'dist'
+                    base: 'dist',
+                    keepalive: true
                 }
             }
         },
@@ -26,7 +27,7 @@ module.exports = function (grunt) {
         },
         concat: {
             css: {
-                src: ['src/3rd/semantic/build/packaged/css/semantic.css', 'src/styles/*.css'],
+                src: ['src/styles/*.css'],
                 dest: 'dist/styles/main.css'
             }
         },
